@@ -90,48 +90,37 @@ class HomePageView extends StatelessWidget {
                           // Generate 100 widgets that display their index in the List.
                           children: List.generate(quicklinks.length, (index) {
                             return Card(
-                              child: Container(
-                                decoration: const BoxDecoration(
-                                  gradient: LinearGradient(
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      colors: <Color>[
-                                        Colors.transparent,
-                                        Color.fromARGB(104, 188, 223, 239)
-                                      ]),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(top: 8.0),
-                                  child: Center(
-                                    child: Column(
-                                      children: [
-                                        IconButton(
-                                          icon: Icon(quicklinks.entries
-                                              .elementAt(index)
-                                              .value),
-                                          onPressed: () {
-                                            Navigator.restorablePushNamed(
-                                                context,
-                                                quicklinks.entries
-                                                    .elementAt(index)
-                                                    .key[1]);
-                                            log('navigate to ${quicklinks.entries.elementAt(index).key[0]} page');
-                                          },
-                                          tooltip: quicklinks.entries
-                                              .elementAt(index)
-                                              .key[0],
-                                        ),
-                                        Text(
-                                          quicklinks.entries
-                                              .elementAt(index)
-                                              .key[0],
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodySmall,
-                                          textAlign: TextAlign.center,
-                                        )
-                                      ],
-                                    ),
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: Center(
+                                  child: Column(
+                                    children: [
+                                      IconButton(
+                                        icon: Icon(quicklinks.entries
+                                            .elementAt(index)
+                                            .value),
+                                        onPressed: () {
+                                          Navigator.restorablePushNamed(
+                                              context,
+                                              quicklinks.entries
+                                                  .elementAt(index)
+                                                  .key[1]);
+                                          log('navigate to ${quicklinks.entries.elementAt(index).key[0]} page');
+                                        },
+                                        tooltip: quicklinks.entries
+                                            .elementAt(index)
+                                            .key[0],
+                                      ),
+                                      Text(
+                                        quicklinks.entries
+                                            .elementAt(index)
+                                            .key[0],
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall,
+                                        textAlign: TextAlign.center,
+                                      )
+                                    ],
                                   ),
                                 ),
                               ),
