@@ -1,13 +1,18 @@
+
 import 'package:estatio/src/accounts/accounts_page_view.dart';
 import 'package:estatio/src/activities/activities_page_view.dart';
 import 'package:estatio/src/extras/extras_page_view.dart';
 import 'package:estatio/src/home_page/home_page_view.dart';
 import 'package:estatio/src/security/security_page_view.dart';
 import 'package:estatio/src/settings/settings_view.dart';
+import 'package:estatio/src/utils/bonjour.dart';
+import 'package:estatio/src/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class IndexView extends StatefulWidget {
-  const IndexView({Key? key}) : super(key: key);
+  const IndexView({
+    Key? key,
+  }) : super(key: key);
   static const routeName = '/';
   @override
   State<IndexView> createState() => _IndexViewState();
@@ -15,65 +20,103 @@ class IndexView extends StatefulWidget {
 
 class _IndexViewState extends State<IndexView> {
   int activeIndex = 0;
-  void changeActivePage(int index) {
+  void _onItemTapped(int index) {
     setState(() {
       activeIndex = index;
     });
   }
 
-  List<Widget> pages = [];
-
+  final scr = "";
+  List<Widget> pages = <Widget>[
+    HomePageView(),
+    const ActivitiesPageView(),
+    const AccountsPageView(),
+    const SecurityPageView(),
+    const ExtrasPageView()
+  ];
+  List<BottomNavigationBarItem> navItems = <BottomNavigationBarItem>[
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.home),
+      label: 'Home',
+    ),
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.event),
+      label: 'Activities',
+    ),
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.account_balance),
+      label: 'Accounts',
+    ),
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.local_police_rounded),
+      label: 'Security',
+    ),
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.theater_comedy_rounded),
+      label: 'Extras',
+    ),
+  ];
+  String greeting = Bonjour().greeting();
   @override
   void initState() {
-    pages = [
-      const HomePageView(),
-      const ActivitiesPageView(),
-      const AccountsPageView(),
-      const SecurityPageView(),
-      const ExtrasPageView()
-    ];
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    String user = "Emmanuel";
+    String? pageTitle = navItems.elementAt(activeIndex).label;
+    deviceHeight = MediaQuery.of(context).size.height;
+    deviceWidth = MediaQuery.of(context).size.width;
+    devicetextScaleFactor = MediaQuery.of(context).textScaleFactor;
+    devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
     return Scaffold(
-        appBar: AppBar(
-           title: const Text('Welcome Erondu'),
-          actions: [
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () {
-              // Navigate to the settings page. If the user leaves and returns
-              // to the app after it has been killed while running in the
-              // background, the navigation stack is restored.
-              Navigator.restorablePushNamed(context, SettingsView.routeName);
-            },
+      appBar: AppBar(
+          elevation: 1,
+          leading: Padding(
+            padding: EdgeInsets.only(left: 25 * devicetextScaleFactor),
+            child: Image.asset(
+              "assets/images/3.0x/flutter_logo.png",
+              height: 20,
+              width: 25,
+            ),
           ),
-        ]),
-        bottomNavigationBar: SizedBox(
-          width: MediaQuery.of(context).size.width,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          leadingWidth: 50,
+          automaticallyImplyLeading: true,
+          toolbarHeight: devicetextScaleFactor * 70,
+          centerTitle: true,
+          title: Row(
             children: [
-              IconButton(
-                  onPressed: () => changeActivePage(0),
-                  icon: const Icon(Icons.home)),
-              IconButton(
-                  onPressed: () => changeActivePage(1),
-                  icon: const Icon(Icons.volunteer_activism)),
-              IconButton(
-                  onPressed: () => changeActivePage(2),
-                  icon: const Icon(Icons.account_balance)),
-              IconButton(
-                  onPressed: () => changeActivePage(3),
-                  icon: const Icon(Icons.security)),
-              IconButton(
-                  onPressed: () => changeActivePage(4),
-                  icon: const Icon(Icons.theater_comedy)),
+              SizedBox(
+                  width: deviceWidth * 0.6,
+                  child: Text(
+                    activeIndex == 0 ? "$greeting, $user." : pageTitle!,
+                    softWrap: false,
+                    overflow: TextOverflow.clip,
+                    style: TextStyle(fontSize: devicetextScaleFactor * 25),
+                  )),
             ],
           ),
-        ),
-        body: pages[activeIndex]);
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.settings),
+              onPressed: () {
+                // Navigate to the settings page. If the user leaves and returns
+                // to the app after it has been killed while running in the
+                // background, the navigation stack is restored.
+                Navigator.restorablePushNamed(context, SettingsView.routeName);
+              },
+            ),
+          ]),
+      body: Center(
+        child: pages.elementAt(activeIndex),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        showUnselectedLabels: true,
+        items: navItems,
+        currentIndex: activeIndex,
+        onTap: _onItemTapped,
+      ),
+    );
   }
 }

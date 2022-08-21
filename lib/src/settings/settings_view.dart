@@ -7,7 +7,7 @@ import 'settings_controller.dart';
 /// When a user changes a setting, the SettingsController is updated and
 /// Widgets that listen to the SettingsController are rebuilt.
 class SettingsView extends StatelessWidget {
-  const SettingsView({Key? key, required this.controller}) : super(key: key);
+  const SettingsView({Key? key, required this.controller,}) : super(key: key);
 
   static const routeName = '/settings';
 
@@ -16,9 +16,13 @@ class SettingsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Settings'),
-      ),
+           appBar: AppBar(
+          toolbarHeight: 40,
+          centerTitle: false,
+          backgroundColor: Colors.blueGrey[100],
+          foregroundColor: Colors.grey[800],
+          title: const Text("Settings!"),
+          ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         // Glue the SettingsController to the theme selection DropdownButton.

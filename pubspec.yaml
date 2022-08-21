@@ -10,10 +10,14 @@ environment:
   sdk: ">=2.17.6 <3.0.0"
 
 dependencies:
+  carousel_slider: ^4.1.1
   flutter:
     sdk: flutter
+  flutter_dotenv: ^5.0.2
   flutter_localizations:
     sdk: flutter
+  flutter_riverpod: ^1.0.4
+  marquee: ^2.2.3
 
 dev_dependencies:
   flutter_test:
@@ -29,4 +33,5 @@ flutter:
 
   assets:
     # Add assets from the images directory to the application.
+    - .env
     - assets/images/
