@@ -11,7 +11,7 @@ TextStyle iconlabel = TextStyle(
 TextStyle headingText = TextStyle(
     fontFamily: "Hind",
     fontWeight: FontWeight.w600,
-    fontSize: devicetextScaleFactor * 32);
+    fontSize: devicetextScaleFactor);
 
 class ConstantStrings {
   static const breakingNews = "&q=pegasus&language=en";

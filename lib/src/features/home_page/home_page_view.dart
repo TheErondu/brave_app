@@ -51,7 +51,10 @@ class HomePageView extends ConsumerWidget {
               child: ListTile(
                   contentPadding: const EdgeInsets.only(left: 12),
                   leading: Text("$greeting, ${userData?.user?.name?? "loading.."}",
-                      style: headingText),
+                      style: headingText,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      ),
                   title: Icon(
                     timeOfDayIcon,
                     color: Colors.yellow,
