@@ -15,7 +15,7 @@ class EnvironmentVariables {
       {this.apiBaseUrl = "",
       this.clientKey = "",
       this.apiTimeoutInSeconds = 0});
-  String clientKey ="pub_104514a72bbaa8fabc591f4775b051e39938b";
-  String apiBaseUrl = "https://newsdata.io/api?apikey=";
+  String clientKey ="";
+  String apiBaseUrl = "https://wf.newscentral.ng/api";
   int apiTimeoutInSeconds =60;
 }

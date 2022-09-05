@@ -1,0 +1,11 @@
+{
+    "message": "User Logged in!",
+    "user_id": 107,
+    "name": "Administrator",
+    "email": "itsupport@newscentral.ng",
+    "department": "I.T",
+    "department_id": 12,
+    "role": "Admin",
+    "access_token": "112|b3ZasAOoUx9UCF3d2JU7oeG9nDxDeOAUsef1PuFm",
+    "token_type": "Bearer"
+  }

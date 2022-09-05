@@ -2,9 +2,8 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:estatio/src/data/repository/user_repo.dart';
 import 'package:estatio/src/features/settings/settings_view.dart';
-import 'package:estatio/src/repository/news.dart';
-import 'package:estatio/src/repository/news_repo.dart';
 import 'package:estatio/src/utils/bonjour.dart';
 import 'package:estatio/src/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
@@ -39,11 +38,7 @@ class HomePageView extends ConsumerWidget {
   final IconData timeOfDayIcon = Bonjour().timeOfDayIcon();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var newslist = NewsRepository().getBreakingNews().then(
-      (value) {
-        print(BreakingNews.fromJson(value).results!.map((e) => e.title).toList());
-      },
-    );
+    final userData = ref.watch(userInfoProvider).value;
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -55,7 +50,8 @@ class HomePageView extends ConsumerWidget {
               padding: const EdgeInsets.only(top: 35, bottom: 0),
               child: ListTile(
                   contentPadding: const EdgeInsets.only(left: 12),
-                  leading: Text("$greeting, $user.", style: headingText),
+                  leading: Text("$greeting, ${userData?.user?.name?? "loading.."}",
+                      style: headingText),
                   title: Icon(
                     timeOfDayIcon,
                     color: Colors.yellow,
