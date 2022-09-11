@@ -1,10 +1,9 @@
-import 'dart:convert';
+
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:estatio/globals.dart';
 import 'package:estatio/src/data/models/user_model.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 String token = "112|b3ZasAOoUx9UCF3d2JU7oeG9nDxDeOAUsef1PuFm";
 
@@ -28,6 +27,4 @@ class UserRepository {
   }
 }
 
-final userInfoProvider = FutureProvider<UserModel>((ref) async {
-  return await UserRepository().userInfo();
-});
+

@@ -1,16 +1,13 @@
-import 'dart:convert';
 import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:estatio/src/data/repository/user_repo.dart';
+import 'package:estatio/src/data/providers/home_page_provider.dart';
 import 'package:estatio/src/features/settings/settings_view.dart';
 import 'package:estatio/src/utils/bonjour.dart';
 import 'package:estatio/src/utils/constants.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:marquee/marquee.dart';
+import 'package:ticker_text/ticker_text.dart';
 
 class HomePageView extends ConsumerWidget {
   HomePageView({Key? key}) : super(key: key);
@@ -38,33 +35,35 @@ class HomePageView extends ConsumerWidget {
   final IconData timeOfDayIcon = Bonjour().timeOfDayIcon();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userData = ref.watch(userInfoProvider).value;
-
     return Scaffold(
       body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
         physics: const AlwaysScrollableScrollPhysics(),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 35, bottom: 0),
-              child: ListTile(
-                  contentPadding: const EdgeInsets.only(left: 12),
-                  leading: Text("$greeting, ${userData?.user?.name?? "loading.."}",
+              padding: const EdgeInsets.only(top: 35),
+              child: Builder(builder: (context) {
+                final userData = ref.watch(userInfoProvider).value;
+                return ListTile(
+                    leading: Text(
+                      "$greeting, ${userData?.user?.name ?? "loading.."}",
                       style: headingText,
-                      overflow: TextOverflow.ellipsis,
+                      overflow: TextOverflow.visible,
                       maxLines: 1,
-                      ),
-                  title: Icon(
-                    timeOfDayIcon,
-                    color: Colors.yellow,
-                  ),
-                  trailing: IconButton(
-                    icon: const Icon(Icons.settings),
-                    onPressed: () {
-                      Navigator.pushNamed(context, SettingsView.routeName);
-                    },
-                  )),
+                    ),
+                    title: Icon(
+                      timeOfDayIcon,
+                      color: Colors.yellow,
+                    ),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.settings),
+                      onPressed: () {
+                        Navigator.pushNamed(context, SettingsView.routeName);
+                      },
+                    ));
+              }),
             ),
             const Divider(
               thickness: 2,
@@ -73,14 +72,10 @@ class HomePageView extends ConsumerWidget {
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(45)),
               alignment: Alignment.topLeft,
-              padding: const EdgeInsets.only(top: 8, left: 10),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Welcome to Greenfield Estate!',
-                  style: headingText,
-                  textScaleFactor: devicetextScaleFactor * 0.9,
-                ),
+              padding: const EdgeInsets.only(top: 8, left: 20, bottom: 10),
+              child: Text(
+                'Welcome to Greenfield Estate!',
+                style: headingText,
               ),
             ),
             Center(
@@ -122,13 +117,85 @@ class HomePageView extends ConsumerWidget {
                     ),
                   ),
                   const Divider(),
-                  Text(
+                  Column(
+                    children: [
+                      const Center(
+                          child: Text(
+                        'Latest News',
+                        style: TextStyle(decoration: TextDecoration.underline),
+                      )),
+                      Card(
+                          color: Colors.teal,
+                          child: SizedBox(
+                            height: 30,
+                            child: Builder(builder: (context) {
+                              final articles = ref.watch(articleProvider).value;
+                              return SizedBox(
+                                width: deviceWidth *
+                                    0.95, // constrain the parent width so the child overflows and scrolling takes effect
+                                child: Stack(
+                                  children: [
+                                    TickerText(
+                                      // default values // this is optional
+                                      scrollDirection: Axis.horizontal,
+                                      speed: 35,
+                                      startPauseDuration:
+                                          const Duration(seconds: 2),
+                                      endPauseDuration:
+                                          const Duration(seconds: 2),
+                                      returnDuration:
+                                          const Duration(milliseconds: 400),
+                                      primaryCurve: Curves.linear,
+                                      returnCurve: Curves.easeOut,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 8, horizontal: 4),
+                                        child: Text(
+                                          articles ?? "loading..",
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.white),
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: 55,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(1),
+                                          shape: BoxShape.rectangle,
+                                          color: const Color.fromARGB(
+                                              255, 0, 0, 0)),
+                                      child: const Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 7, horizontal: 4),
+                                        child: Align(
+                                          child: Text(
+                                            "News",
+                                            style: TextStyle(
+                                                letterSpacing: 1,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w700,
+                                                color: Colors.white),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }),
+                          )),
+                    ],
+                  ),
+                  const Divider(),
+                  const Text(
                     'Quick Links',
                     style: TextStyle(
                         fontFamily: "Hind",
                         fontWeight: FontWeight.w500,
-                        fontSize: devicetextScaleFactor * 32),
-                    textScaleFactor: 0.5,
+                        fontSize: 14),
                   ),
                   const Divider(),
                   SizedBox(
@@ -140,80 +207,41 @@ class HomePageView extends ConsumerWidget {
                         // Generate 100 widgets that display their index in the List.
                         children: List.generate(quicklinks.length, (index) {
                           return Card(
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 8.0),
-                              child: Center(
-                                child: Column(
-                                  children: [
-                                    IconButton(
-                                      icon: Icon(quicklinks.entries
-                                          .elementAt(index)
-                                          .value),
-                                      onPressed: () {
-                                        Navigator.restorablePushNamed(
-                                            context,
-                                            quicklinks.entries
-                                                .elementAt(index)
-                                                .key[1]);
-                                        log('navigate to ${quicklinks.entries.elementAt(index).key[0]} page');
-                                      },
-                                      tooltip: quicklinks.entries
-                                          .elementAt(index)
-                                          .key[0],
-                                    ),
-                                    Text(
-                                      quicklinks.entries
-                                          .elementAt(index)
-                                          .key[0],
-                                      style: TextStyle(
-                                          fontFamily: "Hind",
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: devicetextScaleFactor * 16),
-                                      textAlign: TextAlign.center,
-                                    )
-                                  ],
-                                ),
+                            child: Center(
+                              child: Column(
+                                children: [
+                                  IconButton(
+                                    icon: Icon(quicklinks.entries
+                                        .elementAt(index)
+                                        .value),
+                                    onPressed: () {
+                                      Navigator.restorablePushNamed(
+                                          context,
+                                          quicklinks.entries
+                                              .elementAt(index)
+                                              .key[1]);
+                                      log('navigate to ${quicklinks.entries.elementAt(index).key[0]} page');
+                                    },
+                                    tooltip: quicklinks.entries
+                                        .elementAt(index)
+                                        .key[0],
+                                  ),
+                                  Text(
+                                    quicklinks.entries.elementAt(index).key[0],
+                                    style: const TextStyle(
+                                        fontFamily: "Hind",
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 12),
+                                    textAlign: TextAlign.center,
+                                    overflow: TextOverflow.visible,
+                                    maxLines: 2,
+                                  )
+                                ],
                               ),
                             ),
                           );
                         })),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Column(
-                    children: [
-                      const Center(
-                          child: Text(
-                        'Notice Board',
-                        style: TextStyle(decoration: TextDecoration.underline),
-                      )),
-                      Card(
-                        color: Color(0xFF088781),
-                        child: SizedBox(
-                            height: 30,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 8.0),
-                              child: Marquee(
-                                text: 'Some sample text that takes some space.',
-                                style: Theme.of(context).textTheme.bodyLarge,
-                                scrollAxis: Axis.horizontal,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                blankSpace: 20.0,
-                                velocity: 100.0,
-                                pauseAfterRound: const Duration(seconds: 1),
-                                startPadding: 10.0,
-                                accelerationDuration:
-                                    const Duration(seconds: 1),
-                                accelerationCurve: Curves.linear,
-                                decelerationDuration:
-                                    const Duration(milliseconds: 500),
-                                decelerationCurve: Curves.easeOut,
-                              ),
-                            )),
-                      ),
-                    ],
-                  )
                 ],
               ),
             ),

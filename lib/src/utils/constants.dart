@@ -6,12 +6,12 @@ double devicePixelRatio = 0;
 double devicetextScaleFactor = 0;
 TextStyle iconlabel = TextStyle(
     fontFamily: "Hind",
-    fontWeight: FontWeight.w600,
-    fontSize: devicetextScaleFactor * 16);
-TextStyle headingText = TextStyle(
+    fontWeight: FontWeight.w400,
+    fontSize: devicetextScaleFactor * 14);
+TextStyle headingText = const TextStyle(
     fontFamily: "Hind",
-    fontWeight: FontWeight.w600,
-    fontSize: devicetextScaleFactor);
+    fontWeight: FontWeight.w500,
+    fontSize: 18);
 
 class ConstantStrings {
   static const breakingNews = "&q=pegasus&language=en";

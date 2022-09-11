@@ -15,7 +15,9 @@ class EnvironmentVariables {
       {this.apiBaseUrl = "",
       this.clientKey = "",
       this.apiTimeoutInSeconds = 0});
-  String clientKey ="";
-  String apiBaseUrl = "https://wf.newscentral.ng/api";
-  int apiTimeoutInSeconds =60;
+  String clientKey = "";
+  String apiBaseUrl = "https://api.qodestone.dev/api";
+  String newsApiBaseurl =
+      "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=e7880933f7714b7fad3e09f49353e44a";
+  int apiTimeoutInSeconds = 60;
 }
