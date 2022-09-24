@@ -1,4 +1,4 @@
-import 'package:estatio/src/utils/constants.dart';
+
 import 'package:flutter/material.dart';
 
 import 'settings_controller.dart';
@@ -20,7 +20,7 @@ class SettingsView extends StatelessWidget {
            appBar: AppBar(
           toolbarHeight: 40,
           centerTitle: false,
-          title:  Text("Settings",style: headingText,),
+          title:  Text("Settings",style: Theme.of(context).textTheme.headline1,),
           ),
       body: Padding(
         padding: const EdgeInsets.all(16),

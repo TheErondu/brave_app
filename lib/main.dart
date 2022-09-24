@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
 
 import 'src/app.dart';
 import 'src/features/settings/settings_controller.dart';
@@ -14,6 +16,8 @@ import 'src/features/settings/settings_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await loadEnvFile();
+//initlize Box Storage
+await Hive.initFlutter();
 
     // Set up the SettingsController, which will glue user settings to multiple
   // Flutter Widgets.
@@ -30,6 +34,7 @@ void main() async {
   Global.environmentVariables = EnvironmentVariables(
       apiBaseUrl: dotenv.env['BASE_URL']!,
       clientKey: dotenv.env['CLIENT_KEY']!,
+      newsApiBaseurl: dotenv.env['NEWSAPI_URL']!,
       apiTimeoutInSeconds:
           int.parse(dotenv.env['API_TIMEOUT_IN_SECONDS'] ?? 60.toString()));
 

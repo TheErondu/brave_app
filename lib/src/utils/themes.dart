@@ -1,80 +1,102 @@
 import 'package:flutter/material.dart';
 
-ThemeData estatioLight = ThemeData(
-  // Define the default brightness and colors.
-  // useMaterial3: true,
-  colorScheme: ColorScheme.fromSeed(
-      seedColor: const Color.fromARGB(255, 255, 255, 255),
-      brightness: Brightness.light,
-      primary: const Color.fromARGB(255, 233, 237, 237),
-      onPrimary: Colors.blueGrey[900],
-      background: Colors.blue,
-      tertiary: const Color.fromARGB(255, 46, 77, 92),
-      onTertiary: Colors.blueGrey[100],
-      onPrimaryContainer: Colors.blueGrey),
-  bottomNavigationBarTheme: BottomNavigationBarThemeData(
-    backgroundColor: Colors.grey[900],
-    elevation: 10,
-    selectedLabelStyle: const TextStyle(
-        color: Color(0xFFA67926), fontFamily: 'Montserrat', fontSize: 14.0),
-    unselectedLabelStyle: TextStyle(
-        color: Colors.grey[600], fontFamily: 'Montserrat', fontSize: 12.0),
-    selectedItemColor: const Color.fromARGB(255, 45, 137, 183),
-    unselectedItemColor: Colors.blueGrey[900],
-    showUnselectedLabels: true,
-  ),
+class AppTheme {
+  //
+  AppTheme._();
 
-  // Define the default font family.
-  fontFamily: 'lato',
+  static final ThemeData lightTheme = ThemeData(
+    scaffoldBackgroundColor: Colors.white,
+    fontFamily: 'Quicksand',
+    appBarTheme: const AppBarTheme(
+      color: Colors.white,
+      iconTheme: IconThemeData(
+        color: Colors.black,
+      ),
+    ),
+    colorScheme: const ColorScheme.light(
+        primary: Colors.white70,
+        inversePrimary: Colors.black,
+        onPrimary: Colors.black,
+        secondary:Color(0xFF977934),
+        surface: Colors.green,
+        onSecondary: Colors.white,
+        shadow: Colors.black,
+        secondaryContainer: Colors.white70),
+    cardTheme: const CardTheme(
+      color: Color(0xFF977934),
+    ),
+    iconTheme: const IconThemeData(
+      color: Colors.black,
+    ),
+    textTheme: const TextTheme(
+       bodyText1:TextStyle(
+          color: Colors.white, fontSize: 12.0, fontWeight: FontWeight.w600) ,
+      button: TextStyle(
+          color: Colors.black, fontSize: 12.0, fontWeight: FontWeight.w700),
+      headline1: TextStyle(
+          color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.w700),
+      headline2: TextStyle(
+          color: Colors.white, fontSize: 16.0, fontWeight: FontWeight.w700),
+      headline3: TextStyle(
+          color: Colors.white, fontSize: 16.0, fontWeight: FontWeight.w700),
+      subtitle1: TextStyle(
+          color: Colors.black, fontSize: 18.0, fontWeight: FontWeight.w600),
+      subtitle2: TextStyle(
+        color: Colors.black,
+        fontWeight: FontWeight.w700,
+        fontSize: 18.0,
+      ),
+      headline6: TextStyle(
+          color: Colors.white70, fontSize: 16.0, fontWeight: FontWeight.w700),
+    ),
+  );
 
-  // Define the default `TextTheme`. Use this to specify the default
-  // text styling for headlines, titles, bodies of text, and more.
-  textTheme: const TextTheme(
-    headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-    headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-    bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
-  ),
-);
-
-ThemeData estatioDark = ThemeData(
-  colorScheme: ColorScheme.fromSeed(
-      seedColor: const Color.fromARGB(255, 0, 111, 72),
-      brightness: Brightness.dark,
-      primary: const Color.fromARGB(255, 233, 237, 237),
-      onPrimary: Colors.blueGrey[100],
-      background: Colors.blue,
-      tertiary: const Color.fromARGB(255, 46, 77, 92),
-      onTertiary: Colors.blueGrey[100],
-      onPrimaryContainer: Colors.blueGrey),
-  bottomNavigationBarTheme: BottomNavigationBarThemeData(
-    backgroundColor: Colors.grey[900],
-    elevation: 10,
-    selectedLabelStyle: const TextStyle(
-        color: Color(0xFFA67926), fontFamily: 'Montserrat', fontSize: 14.0),
-    unselectedLabelStyle: TextStyle(
-        color: Colors.grey[600], fontFamily: 'Montserrat', fontSize: 12.0),
-    selectedItemColor: Colors.blueGrey[100],
-    unselectedItemColor: Colors.blueGrey[400],
-    showUnselectedLabels: true,
-  ),
-
-  // Define the default font family.
-  fontFamily: 'Lato',
-
-  // Define the default `TextTheme`. Use this to specify the default
-  // text styling for headlines, titles, bodies of text, and more.
-  textTheme: const TextTheme(
-    headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-    headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-    bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
-  ),
-);
-bool isDarkMode = ThemeMode.system == Brightness.dark;
-
-Color? bgColor = isDarkMode ? Colors.blueGrey[900] : Colors.blueGrey[100];
-Color? iconColors = isDarkMode ? Colors.blueGrey[100] : Colors.blueGrey[900];
-Color? unSelectedIconColors =
-    isDarkMode ? Colors.blueGrey[100] : Colors.blueGrey[900];
-Color? primaryColor = Colors.black;
-Color? secondaryColor = Colors.blueGrey[900];
-Color? textColor = Colors.blueGrey[900];
+  static final ThemeData darkTheme = ThemeData(
+    fontFamily: 'Quicksand',
+    scaffoldBackgroundColor: Colors.black,
+    appBarTheme: const AppBarTheme(
+      color: Colors.black,
+      iconTheme: IconThemeData(
+        color: Colors.green,
+      ),
+    ),
+    colorScheme: ColorScheme.dark(
+        primary: Colors.grey.shade900,
+        onPrimary: Colors.white,
+        secondary:const Color(0xFF977934),
+        onSecondary: Colors.white,
+        shadow: Colors.black,
+        surface: Colors.green,
+        inversePrimary: Colors.black,
+        secondaryContainer: Colors.green),
+    cardTheme: const CardTheme(
+      color: Colors.black,
+    ),
+    iconTheme: const IconThemeData(
+      color: Colors.white54,
+    ),
+    textTheme: const TextTheme(
+      bodyText1:TextStyle(
+          color: Colors.white, fontSize: 12.0, fontWeight: FontWeight.w600) ,
+       button: TextStyle(
+          color: Colors.white, fontSize: 12.0, fontWeight: FontWeight.w700),
+      headline1: TextStyle(
+          color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.w700),
+      headline2: TextStyle(
+          color: Colors.black, fontSize: 16.0, fontWeight: FontWeight.w700),
+      headline3: TextStyle(
+          color: Colors.white, fontSize: 16.0, fontWeight: FontWeight.w700),
+      headline5: TextStyle(
+          color: Colors.white, fontSize: 23.0, fontWeight: FontWeight.w700),
+      subtitle1: TextStyle(
+          color: Colors.white70, fontSize: 18.0, fontWeight: FontWeight.w600),
+      subtitle2: TextStyle(
+        color: Colors.white70,
+        fontWeight: FontWeight.w600,
+        fontSize: 18.0,
+      ),
+      headline6: TextStyle(
+          color: Colors.white70, fontSize: 16.0, fontWeight: FontWeight.w700),
+    ),
+  );
+}

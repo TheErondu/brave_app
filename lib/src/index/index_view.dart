@@ -4,15 +4,13 @@ import 'package:estatio/src/features/activities/activities_page_view.dart';
 import 'package:estatio/src/features/extras/extras_page_view.dart';
 import 'package:estatio/src/features/home_page/home_page_view.dart';
 import 'package:estatio/src/features/security/security_page_view.dart';
-
-import 'package:estatio/src/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class IndexView extends StatefulWidget {
   const IndexView({
     Key? key,
   }) : super(key: key);
-  static const routeName = '/';
+  static const routeName = '/index';
   @override
   State<IndexView> createState() => _IndexViewState();
 }
@@ -63,54 +61,15 @@ class _IndexViewState extends State<IndexView> {
 
   @override
   Widget build(BuildContext context) {
-
-    deviceHeight = MediaQuery.of(context).size.height;
-    deviceWidth = MediaQuery.of(context).size.width;
-    devicetextScaleFactor = MediaQuery.of(context).textScaleFactor;
-    devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
     return Scaffold(
-      // appBar: AppBar(
-      //     elevation: 1,
-      //     leading: Padding(
-      //       padding: EdgeInsets.only(left: 25 * devicetextScaleFactor),
-      //       child: Image.asset(
-      //         "assets/images/3.0x/flutter_logo.png",
-      //         height: 20,
-      //         width: 25,
-      //       ),
-      //     ),
-      //     leadingWidth: 50,
-      //     automaticallyImplyLeading: true,
-      //     toolbarHeight: devicetextScaleFactor * 70,
-      //     centerTitle: true,
-      //     title: Row(
-      //       children: [
-      //         SizedBox(
-      //             width: deviceWidth * 0.6,
-      //             child: Text(
-      //               activeIndex == 0 ? "$greeting, $user." : pageTitle!,
-      //               softWrap: false,
-      //               overflow: TextOverflow.clip,
-      //               style: TextStyle(fontSize: devicetextScaleFactor * 25),
-      //             )),
-      //       ],
-      //     ),
-      //     actions: [
-      //       IconButton(
-      //         icon: const Icon(Icons.settings),
-      //         onPressed: () {
-      //           // Navigate to the settings page. If the user leaves and returns
-      //           // to the app after it has been killed while running in the
-      //           // background, the navigation stack is restored.
-      //           Navigator.restorablePushNamed(context, SettingsView.routeName);
-      //         },
-      //       ),
-      //     ]),
       body: Center(
         child: pages.elementAt(activeIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         showUnselectedLabels: true,
+        unselectedItemColor: Theme.of(context).iconTheme.color,
+        selectedItemColor: Theme.of(context).colorScheme.secondary,
         items: navItems,
         currentIndex: activeIndex,
         onTap: _onItemTapped,

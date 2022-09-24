@@ -24,7 +24,7 @@ class Bonjour {
     } else if ((hour > 16) && (hour < 20)) {
       return (Icons.dark_mode);
     } else {
-      return (Icons.light_mode);
+      return (Icons.dark_mode);
     }
   }
 }

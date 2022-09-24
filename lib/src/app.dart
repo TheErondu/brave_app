@@ -1,3 +1,4 @@
+import 'package:estatio/src/features/auth/login_screen.dart';
 import 'package:estatio/src/features/home_page/home_page_view.dart';
 import 'package:estatio/src/index/index_view.dart';
 import 'package:estatio/src/utils/themes.dart';
@@ -55,8 +56,8 @@ class MyApp extends StatelessWidget {
           // Define a light and dark color theme. Then, read the user's
           // preferred ThemeMode (light, dark, or system default) from the
           // SettingsController to display the correct theme.
-          theme: estatioLight,
-          darkTheme: estatioDark,
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
           themeMode: settingsController.themeMode,
           // Define a function to handle named routes in order to support
           // Flutter web url navigation and deep linking.
@@ -72,6 +73,11 @@ class MyApp extends StatelessWidget {
                   case HomePageView.routeName:
                     return HomePageView();
                   case SampleItemListView.routeName:
+                    return const SampleItemListView();
+                  case LoginView.routeName:
+                    return const LoginView();
+                  case IndexView.routeName:
+                    return const IndexView();
                   default:
                     return const IndexView();
                 }

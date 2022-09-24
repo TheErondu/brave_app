@@ -1,5 +1,27 @@
-class UserModel {
-  UserModel({
+class AuthResponse {
+  AuthResponse({
+    required this.user,
+    required this.token,
+  });
+  late final User user;
+  late final String token;
+  
+  AuthResponse.fromJson(Map<String, dynamic> json){
+    user = User.fromJson(json['user']);
+    token = json['token'];
+  }
+ static List<AuthResponse> fromJsonList(List<dynamic>? json) =>
+      json!.map((x) => AuthResponse.fromJson(x)).toList();
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['user'] = user.toJson();
+    data['token'] = token;
+    return data;
+  }
+}
+
+class User {
+  User({
     required this.id,
     required this.name,
     required this.email,
@@ -16,7 +38,7 @@ class UserModel {
   late final String createdAt;
   late final String updatedAt;
   
-  UserModel.fromJson(Map<String, dynamic> json){
+  User.fromJson(Map<String, dynamic> json){
     id = json['id'];
     name = json['name'];
     email = json['email'];

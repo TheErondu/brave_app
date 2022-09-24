@@ -20,6 +20,8 @@ dependencies:
     sdk: flutter
   flutter_riverpod: ^1.0.4
   hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  http: ^0.13.5
   marquee: ^2.2.3
   marquee_widget: ^1.2.0
   ticker_text: ^2.0.0
@@ -40,3 +42,12 @@ flutter:
     # Add assets from the images directory to the application.
     - .env
     - assets/images/
+  fonts:
+    - family: Quicksand
+      fonts:
+        - asset: assets/fonts/Quicksand-Bold.ttf
+        - asset: assets/fonts/Quicksand-Light.ttf
+        - asset: assets/fonts/Quicksand-Medium.ttf
+        - asset: assets/fonts/Quicksand-Regular.ttf
+        - asset: assets/fonts/Quicksand-SemiBold.ttf
+
