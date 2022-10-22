@@ -1,6 +1,8 @@
 import 'package:estatio/src/features/auth/login_screen.dart';
 import 'package:estatio/src/features/home_page/home_page_view.dart';
+import 'package:estatio/src/features/profile/my_profile.dart';
 import 'package:estatio/src/index/index_view.dart';
+import 'package:estatio/src/utils/navigation_service.dart';
 import 'package:estatio/src/utils/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -29,6 +31,7 @@ class MyApp extends StatelessWidget {
       animation: settingsController,
       builder: (BuildContext context, Widget? child) {
         return MaterialApp(
+           navigatorKey: NavigationService.navigatorKey,
           // Providing a restorationScopeId allows the Navigator built by the
           // MaterialApp to restore the navigation stack when a user leaves and
           // returns to the app after it has been killed while running in the
@@ -78,6 +81,8 @@ class MyApp extends StatelessWidget {
                     return const LoginView();
                   case IndexView.routeName:
                     return const IndexView();
+                   case MyProfileScreen.routeName:
+                    return const MyProfileScreen();
                   default:
                     return const IndexView();
                 }

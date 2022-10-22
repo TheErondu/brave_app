@@ -1,21 +1,25 @@
-
+import 'package:estatio/src/data/providers/storage_provider.dart';
+import 'package:estatio/src/data/repository/user_repo.dart';
 import 'package:estatio/src/features/accounts/accounts_page_view.dart';
 import 'package:estatio/src/features/activities/activities_page_view.dart';
 import 'package:estatio/src/features/extras/extras_page_view.dart';
 import 'package:estatio/src/features/home_page/home_page_view.dart';
 import 'package:estatio/src/features/security/security_page_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class IndexView extends StatefulWidget {
+class IndexView extends ConsumerStatefulWidget {
   const IndexView({
     Key? key,
   }) : super(key: key);
-  static const routeName = '/index';
+  static const routeName = '/';
   @override
-  State<IndexView> createState() => _IndexViewState();
+  ConsumerState<IndexView> createState() => _IndexViewState();
 }
 
-class _IndexViewState extends State<IndexView> {
+class _IndexViewState extends ConsumerState<IndexView> {
+  bool isloggedIn = false;
+
   int activeIndex = 0;
   void _onItemTapped(int index) {
     setState(() {
@@ -53,11 +57,6 @@ class _IndexViewState extends State<IndexView> {
       label: 'Extras',
     ),
   ];
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

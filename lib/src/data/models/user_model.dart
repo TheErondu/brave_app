@@ -3,16 +3,14 @@ class UserModel {
     required this.id,
     required this.name,
     required this.email,
-    required this.emailVerifiedAt,
-    required this.userType,
+     this.emailVerifiedAt,
     required this.createdAt,
     required this.updatedAt,
   });
   late final int id;
   late final String name;
   late final String email;
-  late final String emailVerifiedAt;
-  late final String userType;
+  late final String? emailVerifiedAt;
   late final String createdAt;
   late final String updatedAt;
   
@@ -20,8 +18,7 @@ class UserModel {
     id = json['id'];
     name = json['name'];
     email = json['email'];
-    emailVerifiedAt = json['email_verified_at'];
-    userType = json['userType'];
+    emailVerifiedAt = null;
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
@@ -32,7 +29,6 @@ class UserModel {
     data['name'] = name;
     data['email'] = email;
     data['email_verified_at'] = emailVerifiedAt;
-    data['userType'] = userType;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     return data;

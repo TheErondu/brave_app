@@ -21,6 +21,17 @@ final Map<List<String>, IconData> quicklinks = {
   ["Adverts", "/adverts"]: Icons.real_estate_agent_rounded,
   ["News", "/news"]: Icons.newspaper,
   ["Find Nearby Stores", "/stores_nearby"]: Icons.storefront_sharp,
-  ["My Profile", "/prayer"]: Icons.person_rounded,
+  ["My Profile", "/profile"]: Icons.person_rounded,
   ["Settings", "/settings"]: Icons.settings,
 };
+
+enum Size { height, weight }
+
+  double size(BuildContext context,{required Size type} ) { 
+    switch (type) {
+      case Size.weight:
+        return MediaQuery.of(context).size.width;
+      case Size.height:
+        return MediaQuery.of(context).size.height;
+    }
+  }

@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:estatio/src/data/providers/home_page_provider.dart';
-import 'package:estatio/src/data/providers/storage_provider.dart';
+import 'package:estatio/src/features/profile/my_profile.dart';
 import 'package:estatio/src/utils/bonjour.dart';
 import 'package:estatio/src/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -14,18 +14,22 @@ class HomePageView extends ConsumerWidget {
   static const routeName = '/home';
 
   final String greeting = Bonjour().greeting();
-  final String user = "Emmanuel";
   final IconData timeOfDayIcon = Bonjour().timeOfDayIcon();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(userInfoProvider).value;
+    final user = ref.watch(userInfoProvider);
     return Scaffold(
       appBar: AppBar(
         leading: Icon(timeOfDayIcon,
         color: const Color.fromARGB(255, 216, 198, 32),),
-        title: Text( "$greeting, ${user?.name ?? "loading.."}",),
-        actions: const [
-        Icon(Icons.account_circle)
+        title:  user.when(loading: () => const Text("loading"),
+        error: (error, stackTrace) => const Text("Error getting user info"),
+        data: (user) =>Text( "$greeting, ${user?.name}"),
+        ),
+        actions:  [
+        IconButton(
+          onPressed: () => Navigator.pushNamedAndRemoveUntil(context, MyProfileScreen.routeName, (route) => false),
+          icon: const Icon(Icons.account_circle),)
       ]),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -82,7 +86,7 @@ class HomePageView extends ConsumerWidget {
                       Card(
                           color: Colors.teal,
                           child: SizedBox(
-                            height: 30,
+                            height: size(context, type: Size.height)*0.045,
                             child: Builder(builder: (context) {
                               final articles = ref.watch(articleProvider).value;
                               return SizedBox(
