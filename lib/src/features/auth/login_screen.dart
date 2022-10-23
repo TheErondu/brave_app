@@ -133,7 +133,7 @@ class _LoginViewState extends State<LoginView> {
                           if (!mounted) return;
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               backgroundColor:
-                                  Color.fromARGB(255, 180, 142, 16),
+                                  const Color.fromARGB(255, 180, 142, 16),
                               content: Text(
                                 res.message,
                                 style: Theme.of(context).textTheme.displaySmall,

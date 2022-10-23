@@ -6,7 +6,7 @@ class GenericResponse {
     required this.errors,
   });
   late  bool success =false;
-  late  String message ="";
+  late  dynamic message ="";
   late  dynamic data =[];
   late  dynamic errors=[];
 

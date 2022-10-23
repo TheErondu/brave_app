@@ -25,11 +25,11 @@ final Map<List<String>, IconData> quicklinks = {
   ["Settings", "/settings"]: Icons.settings,
 };
 
-enum Size { height, weight }
+enum Size { height, width }
 
   double size(BuildContext context,{required Size type} ) { 
     switch (type) {
-      case Size.weight:
+      case Size.width:
         return MediaQuery.of(context).size.width;
       case Size.height:
         return MediaQuery.of(context).size.height;

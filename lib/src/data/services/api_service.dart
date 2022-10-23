@@ -1,10 +1,11 @@
-import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:estatio/globals.dart';
-import 'package:estatio/src/components/custom_snack_bar.dart';
 import 'package:estatio/src/data/models/generic_resonse_model.dart';
-import 'package:estatio/src/data/providers/storage_provider.dart';
+import 'package:estatio/src/data/services/applogger_service.dart';
+import 'package:estatio/src/data/services/storage_service.dart';
+import 'package:estatio/src/features/profile/my_profile.dart';
+import 'package:estatio/src/utils/navigation_service.dart';
 import 'package:flutter/material.dart';
 
 enum RequestMethod {
@@ -16,21 +17,18 @@ enum RequestMethod {
 }
 
 class ApiService extends ChangeNotifier {
-  ApiService(
-      {this.endpoint = "",
-      this.context,
-      this.requestData,
-      this.secured = false,
-      required this.method});
-  final String endpoint;
-  BuildContext? context;
-  RequestMethod method;
-  Map<String, dynamic>? requestData;
-  bool secured;
+  ApiService();
   GenericResponse? response;
-  Future<GenericResponse?> apiCall() async {
+  static Future<GenericResponse?> apiCall(
+      {String endpoint = "",
+      BuildContext? context,
+      Map<String, dynamic>? requestData,
+     bool secured = false,
+      required RequestMethod method}) async {
+        GenericResponse? response;
     final Dio httpRequest = Dio();
-    String? token = await Storage().readBox("auth", "token");
+    final AppLoggerService applogger = AppLoggerService();
+    String? token = await StorageService().readBox("auth", "token");
     if (method == RequestMethod.get) {
       try {
         final res = await httpRequest.get(
@@ -43,22 +41,26 @@ class ApiService extends ChangeNotifier {
                 : Options(headers: {
                     // "Authorization": "Bearer $token",
                   }));
+
         response = GenericResponse.fromJson(res.data);
       } on DioError catch (e) {
         // The request was made and the server responded with a status code
         // that falls out of the range of 2xx and is also not 304.
 
-        log('Dio error!');
-        log('Status: ${e.response?.statusCode}');
-        log('Data: ${e.response?.data}');
-        log('Message: ${e.message}');
+        applogger.showLog(
+            title: "Dio error",
+            status: e.response?.statusCode,
+            data: e.response?.data,
+            message: e.response?.statusMessage);
         if (e.response?.statusCode == 401) {
           response = GenericResponse.fromJson(e.response?.data);
-          CustomSnackBar(
-            message: response?.message,
-            buttonText: "Login",
-          ).showSnackBar();
+          toLogin(context: NavigationService.navigatorKey.currentContext!);
         } else {
+          applogger.showLog(
+              title: "Dio Success",
+              status: e.response?.statusCode,
+              data: e.response?.data,
+              message: e.response?.statusMessage);
           response = GenericResponse.fromJson(e.response?.data);
         }
       }
@@ -71,10 +73,11 @@ class ApiService extends ChangeNotifier {
             }),
             data: requestData);
         if (res.statusCode == 200) {
-           log('Dio error!');
-        log('Status: ${res.statusCode}');
-        log('Data: ${res.data}');
-        log('Message: ${res.statusMessage}');
+          applogger.showLog(
+              title: "Dio Success",
+              status: res.statusCode,
+              data: res.data,
+              message: res.statusMessage);
           return GenericResponse.fromJson(res.data);
         } else {
           return GenericResponse.fromJson(res.data);
@@ -82,12 +85,11 @@ class ApiService extends ChangeNotifier {
       } on DioError catch (e) {
         // The request was made and the server responded with a status code
         // that falls out of the range of 2xx and is also not 304.
-
-        log('Dio error!');
-        log('Status: ${e.response?.statusCode}');
-        log('Data: ${e.response?.data}');
-        log('Message: ${e.message}');
-
+        applogger.showLog(
+            title: "Dio error",
+            status: e.response?.statusCode,
+            data: e.response?.data,
+            message: e.response?.statusMessage);
         response = GenericResponse.fromJson(e.response?.data);
       }
     }

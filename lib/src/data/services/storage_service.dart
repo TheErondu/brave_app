@@ -6,9 +6,9 @@ final storageprovider = FutureProvider.family<Box, String>((ref, name) async {
   return await Hive.openBox(name);
 });
 
-class Storage {
+class StorageService {
   Future<String?> readBox(String name, String key) async {
-   await Hive.openBox(name);
+    await Hive.openBox(name);
     var box = Hive.box(name);
     return box.get(key);
   }
@@ -17,6 +17,12 @@ class Storage {
     await Hive.openBox(name);
     var box = Hive.box(name);
     box.put(key, value);
+  }
+
+  Future<void> deleteFromBox(String name, String key) async {
+    await Hive.openBox(name);
+    var box = Hive.box(name);
+    box.delete(key);
   }
 
   Future<void> saveThemeMode(String name, String key, int value) async {
@@ -28,7 +34,7 @@ class Storage {
   Future<int> getThemeMode() async {
     await Hive.openBox("settings");
     var box = Hive.box("settings");
-    int themeMode = box.get("themeMode")??ThemeMode.light.index;
+    int themeMode = box.get("themeMode") ?? ThemeMode.light.index;
     return themeMode;
   }
 
