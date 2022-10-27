@@ -1,18 +1,16 @@
+import 'package:estatio/src/components/default_appbar.dart';
 import 'package:flutter/material.dart';
 
 class BaseScaffold extends Scaffold {
   const BaseScaffold(
-      {required this.child,
-      required this.title,
-       this.actions,
+      {
+      this.body,
       super.key});
-  final Widget child;
-  final Widget title;
-  final List<Widget>? actions;
+  final Widget? body;
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: title, actions: actions),
-      body: child,
+      appBar: const DefaultAppBar(),
+      body: body,
     );
   }
 }

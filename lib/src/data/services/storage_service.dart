@@ -19,6 +19,7 @@ class StorageService {
     box.put(key, value);
   }
 
+
   Future<void> deleteFromBox(String name, String key) async {
     await Hive.openBox(name);
     var box = Hive.box(name);

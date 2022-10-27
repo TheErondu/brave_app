@@ -1,3 +1,4 @@
+import 'package:estatio/src/components/default_appbar.dart';
 import 'package:flutter/material.dart';
 
 class ExtrasPageView extends StatelessWidget {
@@ -5,6 +6,11 @@ class ExtrasPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        return const Center(child: Text("extras"));
+       return  const Scaffold(
+      appBar: DefaultAppBar(
+        title: "Extras",
+      ),
+      body: Center(child: Text('Extras Page'),),
+    );
   }
 }

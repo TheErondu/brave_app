@@ -1,22 +1,24 @@
+import 'package:estatio/src/data/services/storage/user_storage_controller.dart.dart';
 import 'package:estatio/src/data/models/generic_resonse_model.dart';
+import 'package:estatio/src/data/models/user.dart';
 import 'package:estatio/src/data/services/api_service.dart';
 import 'package:estatio/src/utils/api_endpoins.dart';
 import 'package:estatio/src/data/models/auth_response.dart';
-import 'package:estatio/src/data/models/user_model.dart';
 import 'package:estatio/src/data/services/storage_service.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 class UserRepository {
-  Future<UserModel?> userInfo() async {
+  Future<User?> userInfo() async {
     final res = await ApiService.apiCall(
         method: RequestMethod.get,
         secured: true,
         endpoint: ApiEndpoints.getUserinfo);
 
     if (res != null && res.success) {
-      UserModel data = UserModel.fromJson(res.data);
+      User data = User.fromJson(res.data);
       //print(data.results!);
-      StorageService().saveStringToBox("user", "name", data.name);
+      UserData userData = UserData(
+          name: data.name, email: data.email, createdAt: data.createdAt);
+      UserStorageService().saveUserData(data: userData);
       return data;
     } else {
       return null;
@@ -24,7 +26,6 @@ class UserRepository {
   }
 
   Future<GenericResponse> login(String email, String password) async {
-    await Hive.openBox('auth');
     var requestData = {
       "email": email,
       "password": password,

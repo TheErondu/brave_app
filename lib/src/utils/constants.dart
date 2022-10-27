@@ -4,6 +4,8 @@ class ConstantStrings {
   static const breakingNews = "&q=pegasus&language=en";
   static const getUserinfo = "/user";
   static const authorizeUser = '/login';
+  static const userData = "UserData";
+  static const userAvatarUrl = "https://api.qodestone.dev/images/faces/1.jpg";
 }
 
 final List<String> imgList = [
@@ -25,13 +27,17 @@ final Map<List<String>, IconData> quicklinks = {
   ["Settings", "/settings"]: Icons.settings,
 };
 
-enum Size { height, width }
+enum ScreenSize { height, width }
 
-  double size(BuildContext context,{required Size type} ) { 
-    switch (type) {
-      case Size.width:
-        return MediaQuery.of(context).size.width;
-      case Size.height:
-        return MediaQuery.of(context).size.height;
-    }
+double size(BuildContext context, {required ScreenSize type}) {
+  switch (type) {
+    case ScreenSize.width:
+      return MediaQuery.of(context).size.width;
+    case ScreenSize.height:
+      return MediaQuery.of(context).size.height;
   }
+}
+
+class CustomColors {
+  static const Color deepGoldColor = Color(0xFF977934);
+}

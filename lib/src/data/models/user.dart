@@ -1,9 +1,11 @@
-class UserModel {
-  UserModel({
+import 'package:hive/hive.dart';
+part 'user.g.dart';
+class User {
+  User({
     required this.id,
     required this.name,
     required this.email,
-     this.emailVerifiedAt,
+    this.emailVerifiedAt,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -13,8 +15,8 @@ class UserModel {
   late final String? emailVerifiedAt;
   late final String createdAt;
   late final String updatedAt;
-  
-  UserModel.fromJson(Map<String, dynamic> json){
+
+  User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     email = json['email'];
@@ -33,4 +35,16 @@ class UserModel {
     data['updated_at'] = updatedAt;
     return data;
   }
+}
+
+@HiveType(typeId: 0)
+class UserData {
+  @HiveField(0)
+  final String name;
+  @HiveField(1)
+  final String email;
+  @HiveField(2)
+  final String createdAt;
+
+  UserData({required this.name, required this.email, required this.createdAt});
 }

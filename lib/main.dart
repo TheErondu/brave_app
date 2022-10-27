@@ -1,25 +1,24 @@
-
 import 'package:estatio/globals.dart';
 import 'package:estatio/src/utils/config.dart';
+import 'package:estatio/src/utils/storage_init.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-
-
 import 'src/app.dart';
 import 'src/features/settings/settings_controller.dart';
 import 'src/features/settings/settings_service.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await loadEnvFile();
 //initlize Box Storage
-await Hive.initFlutter();
+  await Hive.initFlutter();
+  StorageInit.registerAdapters();
+  StorageInit.openBoxes();
 
-    // Set up the SettingsController, which will glue user settings to multiple
+  // Set up the SettingsController, which will glue user settings to multiple
   // Flutter Widgets.
   final settingsController = SettingsController(SettingsService());
 
@@ -46,6 +45,6 @@ await Hive.initFlutter();
         ///This allows you to run the app in different views and Screen sizes,
         /// when the [kReleaseMode] is true it means that the app preview view
         /// is enabled for release mode and vice-versa.
-         ProviderScope(child: MyApp(settingsController: settingsController)));
+        ProviderScope(child: MyApp(settingsController: settingsController)));
   });
 }

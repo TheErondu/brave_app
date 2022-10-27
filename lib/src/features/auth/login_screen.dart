@@ -24,7 +24,7 @@ class _LoginViewState extends State<LoginView> {
             padding: const EdgeInsets.all(10),
             child: ListView(
               children: <Widget>[
-                SizedBox(height: size(context, type: Size.height) * 0.15),
+                SizedBox(height: size(context, type: ScreenSize.height) * 0.15),
                 Container(
                     alignment: Alignment.center,
                     padding: const EdgeInsets.all(10),
