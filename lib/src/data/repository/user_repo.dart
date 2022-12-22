@@ -7,7 +7,7 @@ import 'package:estatio/src/data/models/auth_response.dart';
 import 'package:estatio/src/data/services/storage_service.dart';
 
 class UserRepository {
-  Future<User?> userInfo() async {
+  Future<User?> getUserInfo() async {
     final res = await ApiService.apiCall(
         method: RequestMethod.get,
         secured: true,
@@ -15,7 +15,6 @@ class UserRepository {
 
     if (res != null && res.success) {
       User data = User.fromJson(res.data);
-      //print(data.results!);
       UserData userData = UserData(
           name: data.name, email: data.email, createdAt: data.createdAt);
       UserStorageService().saveUserData(data: userData);
@@ -39,6 +38,7 @@ class UserRepository {
       final data = AuthResponse.fromJson(res.data);
       //print(data.results!);
       StorageService().saveStringToBox("auth", "token", data.token);
+      await UserRepository().getUserInfo();
       return res;
     } else {
       return res!;

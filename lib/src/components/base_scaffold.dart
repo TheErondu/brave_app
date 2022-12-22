@@ -6,6 +6,8 @@ class BaseScaffold extends Scaffold {
       {
       this.body,
       super.key});
+  @override
+  // ignore: overridden_fields
   final Widget? body;
   Widget build(BuildContext context) {
     return Scaffold(

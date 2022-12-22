@@ -1,5 +1,5 @@
 
-import 'package:estatio/src/features/accounts/accounts_page_view.dart';
+import 'package:estatio/src/features/payments/payments_page_view.dart';
 import 'package:estatio/src/features/activities/activities_page_view.dart';
 import 'package:estatio/src/features/extras/extras_page_view.dart';
 import 'package:estatio/src/features/home_page/home_page_view.dart';
@@ -29,8 +29,8 @@ class _IndexViewState extends ConsumerState<IndexView> {
   final scr = "";
   List<Widget> pages = <Widget>[
     HomePageView(),
-    const ActivitiesPageView(),
-    const AccountsPageView(),
+    const ActivitiesPageView(), 
+    PaymentsPageView(),
     const SecurityPageView(),
     const ExtrasPageView()
   ];
@@ -45,7 +45,7 @@ class _IndexViewState extends ConsumerState<IndexView> {
     ),
     const BottomNavigationBarItem(
       icon: Icon(Icons.account_balance),
-      label: 'Accounts',
+      label: 'Payments',
     ),
     const BottomNavigationBarItem(
       icon: Icon(Icons.local_police_rounded),

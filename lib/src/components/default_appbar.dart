@@ -6,9 +6,11 @@ import 'package:flutter/material.dart';
 class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   const DefaultAppBar({
     this.title,
+    this.bottom,
     Key? key,
   }) : super(key: key);
   final String? title;
+  final PreferredSizeWidget? bottom;
   @override
   Size get preferredSize => const Size.fromHeight(60);
   @override
@@ -20,9 +22,10 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
           title ?? "GreenField Estate",
           style: Theme.of(context).textTheme.headline2,
         ),
+        bottom: bottom,
         actions: [
           Padding(
-            padding: const EdgeInsets.only(top:5),
+            padding: const EdgeInsets.only(top: 5),
             child: Stack(children: [
               IconButton(
                 onPressed: () => Navigator.pushNamedAndRemoveUntil(
@@ -56,22 +59,24 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
                   )),
             ]),
           ),
-           GestureDetector(
-            onTap: (() => Navigator.pushNamed(context, MyProfileScreen.routeName)),
-             child:  Padding(
-               padding: const EdgeInsets.symmetric(horizontal:15.0),
-               child: Center(
-                 child: CircleAvatar(
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                              radius: 16,
-                              // Display the Flutter Logo image asset.
-                              foregroundImage: const CachedNetworkImageProvider(ConstantStrings.userAvatarUrl,
-                              
-                              ),
-                            ),
-               ),
-             ),
-           ),
+          GestureDetector(
+            onTap: (() =>
+                Navigator.pushNamed(context, MyProfileScreen.routeName)),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              child: Center(
+                child: CircleAvatar(
+                  backgroundColor: Theme.of(context).colorScheme.onPrimary,
+                  radius: 16,
+                  // Display the Flutter Logo image asset.
+                  foregroundImage: const CachedNetworkImageProvider(
+                    ConstantStrings.userAvatarUrl,
+                  ),
+                  backgroundImage: const AssetImage("assets/images/user.jpg"),
+                ),
+              ),
+            ),
+          ),
         ]);
   }
 }

@@ -1,10 +1,8 @@
-
 import 'package:dio/dio.dart';
 import 'package:estatio/globals.dart';
 import 'package:estatio/src/data/models/generic_resonse_model.dart';
 import 'package:estatio/src/data/services/applogger_service.dart';
 import 'package:estatio/src/data/services/storage_service.dart';
-import 'package:estatio/src/features/profile/my_profile.dart';
 import 'package:estatio/src/utils/navigation_service.dart';
 import 'package:flutter/material.dart';
 
@@ -23,9 +21,9 @@ class ApiService extends ChangeNotifier {
       {String endpoint = "",
       BuildContext? context,
       Map<String, dynamic>? requestData,
-     bool secured = false,
+      bool secured = false,
       required RequestMethod method}) async {
-        GenericResponse? response;
+    GenericResponse? response;
     final Dio httpRequest = Dio();
     final AppLoggerService applogger = AppLoggerService();
     String? token = await StorageService().readBox("auth", "token");
@@ -41,8 +39,17 @@ class ApiService extends ChangeNotifier {
                 : Options(headers: {
                     // "Authorization": "Bearer $token",
                   }));
-
-        response = GenericResponse.fromJson(res.data);
+        if (res.statusCode == 200) {
+          applogger.showLog(
+              title: "Dio Success",
+              status: res.statusCode,
+              data: res.data,
+              message: res.statusMessage);
+          response = GenericResponse.fromJson(res.data);
+          return response;
+        } else {
+          return response;
+        }
       } on DioError catch (e) {
         // The request was made and the server responded with a status code
         // that falls out of the range of 2xx and is also not 304.
@@ -54,7 +61,8 @@ class ApiService extends ChangeNotifier {
             message: e.response?.statusMessage);
         if (e.response?.statusCode == 401) {
           response = GenericResponse.fromJson(e.response?.data);
-          toLogin(context: NavigationService.navigatorKey.currentContext!);
+          NavigationService.toLogin(
+              context: NavigationService.navigatorKey.currentContext!);
         } else {
           applogger.showLog(
               title: "Dio Success",

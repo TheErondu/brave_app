@@ -5,11 +5,10 @@ import 'package:estatio/src/data/models/user.dart';
 import 'package:estatio/src/data/services/storage_service.dart';
 import 'package:estatio/src/data/repository/user_repo.dart';
 import 'package:estatio/src/features/auth/login_screen.dart';
-import 'package:estatio/src/index/index_view.dart';
 import 'package:estatio/src/utils/constants.dart';
+import 'package:estatio/src/utils/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
 
 /// Displays a list of SampleItems.
 class MyProfileScreen extends ConsumerWidget {
@@ -26,7 +25,7 @@ class MyProfileScreen extends ConsumerWidget {
         body: SingleChildScrollView(
           child: SizedBox(
             child: Builder(builder: (context) {
-              UserData userData = UserStorageService().loadUserData();
+              UserData? userData = UserStorageService().loadUserData();
               return Container(
                 constraints: BoxConstraints(maxHeight: size(context, type: ScreenSize.height)*0.8),
                 child: Column(
@@ -39,7 +38,8 @@ class MyProfileScreen extends ConsumerWidget {
                         radius: 50,
                         // Display the Flutter Logo image asset.
                         foregroundImage: CachedNetworkImageProvider(
-                            'https://api.qodestone.dev/images/faces/1.jpg'),
+                            ConstantStrings.userAvatarUrl),
+                             backgroundImage: AssetImage("assets/images/user.jpg")
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -48,13 +48,13 @@ class MyProfileScreen extends ConsumerWidget {
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(8),
-                          child: Text(userData.name,
+                          child: Text(userData?.name??"",
                           style: Theme.of(context).textTheme.headline1,
                           ),
                         ),
                           Padding(
                           padding: const EdgeInsets.all(8),
-                          child: Text(userData.email,
+                          child: Text(userData?.email??"",
                           style: Theme.of(context).textTheme.caption,
                           ),
                         ),
@@ -85,7 +85,8 @@ class MyProfileScreen extends ConsumerWidget {
                         onPressed: () async {
                           await UserRepository().logout();
                           StorageService().deleteFromBox("auth", "token");
-                          toLogin(context: context);
+                          NavigationService.toLogin(context: context);
+                              UserStorageService().deleteUserData();
                         },
                         child:  Text("Logout",
                         style: Theme.of(context).textTheme.caption))
@@ -96,9 +97,10 @@ class MyProfileScreen extends ConsumerWidget {
           ),
         ));
   }
-}
 
-void toLogin({context}) {
+}
+   void toLogin({context}) {
   Navigator.pushNamedAndRemoveUntil(
       context, LoginView.routeName, (route) => false);
 }
+

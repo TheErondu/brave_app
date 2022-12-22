@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:estatio/src/components/default_appbar.dart';
 import 'package:estatio/src/utils/constants.dart';
 import 'package:flutter/material.dart';

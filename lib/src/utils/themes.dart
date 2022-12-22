@@ -2,8 +2,8 @@ import 'package:estatio/src/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme {
-
-    ThemeData lightTheme = ThemeData(
+ AppTheme._();
+  static final ThemeData lightTheme = ThemeData(
     scaffoldBackgroundColor: Colors.white,
     fontFamily: 'Quicksand',
     appBarTheme: const AppBarTheme(
@@ -59,7 +59,7 @@ class AppTheme {
     ),
   );
 
-    ThemeData darkTheme = ThemeData(
+  static final ThemeData darkTheme = ThemeData(
     fontFamily: 'Quicksand',
     scaffoldBackgroundColor: Colors.black,
     appBarTheme: const AppBarTheme(

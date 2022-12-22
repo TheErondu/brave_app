@@ -1,3 +1,5 @@
+import 'package:estatio/src/data/models/user.dart';
+import 'package:estatio/src/data/services/storage/user_storage_controller.dart.dart';
 import 'package:estatio/src/features/auth/login_screen.dart';
 import 'package:estatio/src/features/home_page/home_page_view.dart';
 import 'package:estatio/src/features/profile/my_profile.dart';
@@ -30,8 +32,9 @@ class MyApp extends StatelessWidget {
     return AnimatedBuilder(
       animation: settingsController,
       builder: (BuildContext context, Widget? child) {
+        UserData? user = UserStorageService().loadUserData();
         return MaterialApp(
-           navigatorKey: NavigationService.navigatorKey,
+          navigatorKey: NavigationService.navigatorKey,
           // Providing a restorationScopeId allows the Navigator built by the
           // MaterialApp to restore the navigation stack when a user leaves and
           // returns to the app after it has been killed while running in the
@@ -59,9 +62,10 @@ class MyApp extends StatelessWidget {
           // Define a light and dark color theme. Then, read the user's
           // preferred ThemeMode (light, dark, or system default) from the
           // SettingsController to display the correct theme.
-          theme: AppTheme().lightTheme,
-          darkTheme: AppTheme().darkTheme,
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
           themeMode: settingsController.themeMode,
+          initialRoute: user == null ? "/login" : "/",
           // Define a function to handle named routes in order to support
           // Flutter web url navigation and deep linking.
           onGenerateRoute: (RouteSettings routeSettings) {
@@ -81,7 +85,7 @@ class MyApp extends StatelessWidget {
                     return const LoginView();
                   case IndexView.routeName:
                     return const IndexView();
-                   case MyProfileScreen.routeName:
+                  case MyProfileScreen.routeName:
                     return const MyProfileScreen();
                   default:
                     return const IndexView();

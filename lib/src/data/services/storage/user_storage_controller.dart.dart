@@ -9,10 +9,16 @@ class UserStorageService {
     box.put(ConstantStrings.userData, data);
   }
 
-  UserData loadUserData() {
+  UserData? loadUserData() {
     Hive.openBox(ConstantStrings.userData);
     var box = Hive.box(ConstantStrings.userData);
-    UserData userData = box.get(ConstantStrings.userData);
+    UserData? userData = box.get(ConstantStrings.userData);
     return userData;
+  }
+
+  void deleteUserData() {
+    Hive.openBox(ConstantStrings.userData);
+    var box = Hive.box(ConstantStrings.userData);
+    box.delete(ConstantStrings.userData);
   }
 }
