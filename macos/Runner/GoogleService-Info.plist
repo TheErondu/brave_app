@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>141376676314-2lt5iepv72b0920cvf8jch8471tumt0e.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.141376676314-2lt5iepv72b0920cvf8jch8471tumt0e</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>141376676314-apvpop74ptaov1t3af3upna2daa6vd7c.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB9NQtkauVJ5Ozsa0SoKr74hs8cJgl1HoQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>141376676314</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.estatio</string>
+	<key>PROJECT_ID</key>
+	<string>qodestone-estatio</string>
+	<key>STORAGE_BUCKET</key>
+	<string>qodestone-estatio.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:141376676314:ios:c3be73a98ad0add7e460e3</string>
+</dict>
+</plist>

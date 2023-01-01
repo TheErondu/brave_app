@@ -1,6 +1,10 @@
 import 'package:estatio/globals.dart';
+import 'package:estatio/src/services/applogger_service.dart';
+import 'package:estatio/src/services/notifications/push_service.dart';
 import 'package:estatio/src/utils/config.dart';
 import 'package:estatio/src/utils/storage_init.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -10,6 +14,13 @@ import 'src/app.dart';
 import 'src/features/settings/settings_controller.dart';
 import 'src/features/settings/settings_service.dart';
 
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  await Firebase.initializeApp();
+  print("Handling a background message: ${message.messageId}");
+}
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await loadEnvFile();
@@ -17,7 +28,7 @@ void main() async {
   await Hive.initFlutter();
   StorageInit.registerAdapters();
   StorageInit.openBoxes();
-
+  PushService.init();
   // Set up the SettingsController, which will glue user settings to multiple
   // Flutter Widgets.
   final settingsController = SettingsController(SettingsService());
@@ -29,6 +40,14 @@ void main() async {
   // Run the app and pass in the SettingsController. The app listens to the
   // SettingsController for changes, then passes it further down to the
   // SettingsView.
+
+//handle Foreground Push notifications
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    AppLoggerService.showLog(
+        title: 'Got a message whilst in the foreground!',
+        message: message.notification.toString(),
+        data: message.data);
+  });
 
   Global.environmentVariables = EnvironmentVariables(
       apiBaseUrl: dotenv.env['BASE_URL']!,

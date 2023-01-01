@@ -1,5 +1,5 @@
 import 'package:estatio/src/data/models/user.dart';
-import 'package:estatio/src/data/services/storage/user_storage_controller.dart.dart';
+import 'package:estatio/src/services/storage/user_storage_controller.dart';
 import 'package:estatio/src/features/auth/login_screen.dart';
 import 'package:estatio/src/features/home_page/home_page_view.dart';
 import 'package:estatio/src/features/profile/my_profile.dart';

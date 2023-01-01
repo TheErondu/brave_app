@@ -1,7 +1,7 @@
-import 'package:estatio/src/data/repository/user_repo.dart';
-import 'package:estatio/src/index/index_view.dart';
 import 'package:estatio/src/utils/constants.dart';
+import 'package:estatio/src/utils/navigation_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -15,6 +15,7 @@ class _LoginViewState extends State<LoginView> {
   TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool isLoading = false;
+  bool passwordVisible = false;
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -79,9 +80,19 @@ class _LoginViewState extends State<LoginView> {
                           return null;
                         },
                         cursorColor: Theme.of(context).colorScheme.onPrimary,
-                        obscureText: true,
+                        obscureText: !passwordVisible,
                         controller: passwordController,
                         decoration: InputDecoration(
+                          suffixIcon: IconButton(
+                              onPressed: () => setState(() {
+                                    passwordVisible = !passwordVisible;
+                                  }),
+                              icon: Icon(
+                                passwordVisible
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              )),
                           floatingLabelStyle: TextStyle(
                               color: Theme.of(context).colorScheme.onPrimary),
                           focusedBorder: const OutlineInputBorder(
@@ -103,56 +114,40 @@ class _LoginViewState extends State<LoginView> {
                     style: Theme.of(context).textTheme.button,
                   ),
                 ),
-                Container(
-                    height: 50,
-                    margin: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 60),
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              const Color.fromARGB(255, 158, 127, 24))),
-                      onPressed: () async {
-                        if (!_formKey.currentState!.validate()) return;
-                        setState(() {
-                          isLoading = true;
-                        });
-                        final res = await UserRepository().login(
-                            emailController.text, passwordController.text);
-
-                        if (res.success) {
-                          setState(() {
-                            isLoading = false;
-                          });
-                          if (!mounted) return;
-                          Navigator.pushReplacementNamed(
-                              context, IndexView.routeName);
-                        } else {
-                          setState(() {
-                            isLoading = false;
-                          });
-                          if (!mounted) return;
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              backgroundColor:
-                                  const Color.fromARGB(255, 180, 142, 16),
-                              content: Text(
-                                res.message,
-                                style: Theme.of(context).textTheme.displaySmall,
-                              )));
-                        }
-                      },
-                      child: isLoading
-                          ? const SizedBox(
-                              height: 20,
-                              width: 20,
-                              child: CircularProgressIndicator(
-                                color: Colors.white,
-                                strokeWidth: 1.4,
-                              ),
-                            )
-                          : const Text('Login',
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.white)),
-                    )),
+                Consumer(
+                  builder: (context, ref, child) {
+                    return Container(
+                        height: 50,
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 60),
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  const Color.fromARGB(255, 158, 127, 24))),
+                          onPressed: () async {
+                            if (!_formKey.currentState!.validate()) return;
+                            ref.read(isLoadingProvider.state).state = true;
+                            NavigationService.handleLogin(
+                                context: context,
+                                ref: ref,
+                                email: emailController.text,
+                                password: passwordController.text);
+                          },
+                          child: ref.watch(isLoadingProvider)
+                              ? const SizedBox(
+                                  height: 20,
+                                  width: 20,
+                                  child: CircularProgressIndicator(
+                                    color: Colors.white,
+                                    strokeWidth: 1.4,
+                                  ),
+                                )
+                              : const Text('Login',
+                                  style: TextStyle(
+                                      fontSize: 18, color: Colors.white)),
+                        ));
+                  },
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[

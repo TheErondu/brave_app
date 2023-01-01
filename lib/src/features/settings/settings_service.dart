@@ -1,4 +1,4 @@
-import 'package:estatio/src/data/services/storage_service.dart';
+import 'package:estatio/src/services/storage_service.dart';
 import 'package:flutter/material.dart';
 
 /// A service that stores and retrieves user settings.

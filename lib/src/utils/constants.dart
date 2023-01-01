@@ -1,3 +1,4 @@
+import 'package:estatio/src/data/models/device_info_model.dart';
 import 'package:flutter/material.dart';
 
 class ConstantStrings {
@@ -6,6 +7,7 @@ class ConstantStrings {
   static const authorizeUser = '/login';
   static const userData = "UserData";
   static const userAvatarUrl = "https://api.qodestone.dev/images/faces/1.jpg";
+  static const deviceInfo = "DeviceInfo";
 }
 
 final List<String> imgList = [

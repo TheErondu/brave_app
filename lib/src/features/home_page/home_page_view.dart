@@ -3,7 +3,7 @@
 import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:estatio/src/components/default_appbar.dart';
-import 'package:estatio/src/data/services/storage/user_storage_controller.dart.dart';
+import 'package:estatio/src/services/storage/user_storage_controller.dart';
 import 'package:estatio/src/data/models/user.dart';
 import 'package:estatio/src/utils/bonjour.dart';
 import 'package:estatio/src/utils/constants.dart';

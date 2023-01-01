@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:estatio/globals.dart';
 import 'package:estatio/src/data/models/generic_resonse_model.dart';
-import 'package:estatio/src/data/services/applogger_service.dart';
-import 'package:estatio/src/data/services/storage_service.dart';
+import 'package:estatio/src/services/applogger_service.dart';
+import 'package:estatio/src/services/storage_service.dart';
 import 'package:estatio/src/utils/navigation_service.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +25,6 @@ class ApiService extends ChangeNotifier {
       required RequestMethod method}) async {
     GenericResponse? response;
     final Dio httpRequest = Dio();
-    final AppLoggerService applogger = AppLoggerService();
     String? token = await StorageService().readBox("auth", "token");
     if (method == RequestMethod.get) {
       try {
@@ -40,7 +39,7 @@ class ApiService extends ChangeNotifier {
                     // "Authorization": "Bearer $token",
                   }));
         if (res.statusCode == 200) {
-          applogger.showLog(
+          AppLoggerService.showLog(
               title: "Dio Success",
               status: res.statusCode,
               data: res.data,
@@ -54,7 +53,7 @@ class ApiService extends ChangeNotifier {
         // The request was made and the server responded with a status code
         // that falls out of the range of 2xx and is also not 304.
 
-        applogger.showLog(
+        AppLoggerService.showLog(
             title: "Dio error",
             status: e.response?.statusCode,
             data: e.response?.data,
@@ -64,7 +63,7 @@ class ApiService extends ChangeNotifier {
           NavigationService.toLogin(
               context: NavigationService.navigatorKey.currentContext!);
         } else {
-          applogger.showLog(
+          AppLoggerService.showLog(
               title: "Dio Success",
               status: e.response?.statusCode,
               data: e.response?.data,
@@ -76,12 +75,17 @@ class ApiService extends ChangeNotifier {
       try {
         final res = await httpRequest.post(
             Global.environmentVariables.apiBaseUrl + endpoint,
-            options: Options(headers: {
-              // "Authorization": "Bearer $token",
-            }),
+            options:secured
+                ? Options(headers: {
+                    "Authorization": "Bearer $token",
+                    "Accept": "Accept: application/json"
+                  })
+                : Options(headers: {
+                    // "Authorization": "Bearer $token",
+                  }),
             data: requestData);
         if (res.statusCode == 200) {
-          applogger.showLog(
+          AppLoggerService.showLog(
               title: "Dio Success",
               status: res.statusCode,
               data: res.data,
@@ -93,7 +97,7 @@ class ApiService extends ChangeNotifier {
       } on DioError catch (e) {
         // The request was made and the server responded with a status code
         // that falls out of the range of 2xx and is also not 304.
-        applogger.showLog(
+        AppLoggerService.showLog(
             title: "Dio error",
             status: e.response?.statusCode,
             data: e.response?.data,
