@@ -1,7 +1,5 @@
-
-
-import 'package:estatio/src/features/auth/login_screen.dart';
-import 'package:estatio/src/utils/navigation_service.dart';
+import 'package:estasi/src/features/auth/login_screen.dart';
+import 'package:estasi/src/utils/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

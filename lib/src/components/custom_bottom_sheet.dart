@@ -1,5 +1,4 @@
-
-import 'package:estatio/src/utils/constants.dart';
+import 'package:estasi/src/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomBotttomSheet extends StatelessWidget {
@@ -10,28 +9,32 @@ class CustomBotttomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomSheet(
-      enableDrag: false,
+        enableDrag: false,
         onClosing: () {},
         builder: ((context) {
           return SizedBox(
-            height: size(context, type: ScreenSize.height)*0.4,
+            height: size(context, type: ScreenSize.height) * 0.4,
             child: Column(
               children: [
-                const SizedBox(height: 10,),
+                const SizedBox(
+                  height: 10,
+                ),
                 Container(
                   height: 5,
                   width: 50,
                   decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    color: Colors.grey,
-                    borderRadius: BorderRadius.circular(25)
-                  ),
+                      shape: BoxShape.rectangle,
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.circular(25)),
                 ),
-                 const SizedBox(height: 20,),
-                 Text("Make Payments",
-                style: Theme.of(context).textTheme.headline2,
+                const SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  "Make Payments",
+                  style: Theme.of(context).textTheme.displayMedium,
                 )
-                ],
+              ],
             ),
           );
         }));

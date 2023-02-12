@@ -1,6 +1,6 @@
-import 'package:estatio/src/data/repository/user_repo.dart';
-import 'package:estatio/src/features/auth/login_screen.dart';
-import 'package:estatio/src/index/index_view.dart';
+import 'package:estasi/src/data/repository/user_repo.dart';
+import 'package:estasi/src/features/auth/login_screen.dart';
+import 'package:estasi/src/index/index_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -20,12 +20,12 @@ class NavigationService {
     final res = await UserRepository().login(email, password);
 
     if (res.success) {
-       ref.read(isLoadingProvider.state).state = false;
-         if (!mounted) return;
+      ref.read(isLoadingProvider.notifier).state = false;
+      if (!mounted) return;
       Navigator.pushReplacementNamed(context, IndexView.routeName);
     } else {
-       ref.read(isLoadingProvider.state).state = false;
-         if (!mounted) return;
+      ref.read(isLoadingProvider.notifier).state = false;
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           backgroundColor: const Color.fromARGB(255, 180, 142, 16),
           content: Text(

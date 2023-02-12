@@ -1,5 +1,5 @@
-import 'package:estatio/src/features/auth/login_screen.dart';
-import 'package:estatio/src/utils/navigation_service.dart';
+import 'package:estasi/src/features/auth/login_screen.dart';
+import 'package:estasi/src/utils/navigation_service.dart';
 import 'package:flutter/material.dart';
 
 class CustomSnackBar {
@@ -15,19 +15,15 @@ class CustomSnackBar {
           children: [
             Text(
               "$message",
-              style: Theme.of(context)
-                  .textTheme
-                  .displaySmall,
+              style: Theme.of(context).textTheme.displaySmall,
             ),
             TextButton(
-              style: Theme.of(context).textButtonTheme.style,
-              onPressed: () => Navigator.pushNamedAndRemoveUntil(
-                  context, LoginView.routeName, (route) => false),
-              child: const Text("Login")
-            ),
+                style: Theme.of(context).textButtonTheme.style,
+                onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                    context, LoginView.routeName, (route) => false),
+                child: const Text("Login")),
           ],
         ));
-    ScaffoldMessenger.of(context)
-        .showSnackBar(snackBar);
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:estatio/globals.dart';
-import 'package:estatio/src/data/models/generic_resonse_model.dart';
-import 'package:estatio/src/services/applogger_service.dart';
-import 'package:estatio/src/services/storage_service.dart';
-import 'package:estatio/src/utils/navigation_service.dart';
+import 'package:estasi/globals.dart';
+import 'package:estasi/src/data/models/generic_resonse_model.dart';
+import 'package:estasi/src/services/applogger_service.dart';
+import 'package:estasi/src/services/storage_service.dart';
+import 'package:estasi/src/utils/navigation_service.dart';
 import 'package:flutter/material.dart';
 
 enum RequestMethod {
@@ -39,11 +39,6 @@ class ApiService extends ChangeNotifier {
                     // "Authorization": "Bearer $token",
                   }));
         if (res.statusCode == 200) {
-          AppLoggerService.showLog(
-              title: "Dio Success",
-              status: res.statusCode,
-              data: res.data,
-              message: res.statusMessage);
           response = GenericResponse.fromJson(res.data);
           return response;
         } else {
@@ -75,7 +70,7 @@ class ApiService extends ChangeNotifier {
       try {
         final res = await httpRequest.post(
             Global.environmentVariables.apiBaseUrl + endpoint,
-            options:secured
+            options: secured
                 ? Options(headers: {
                     "Authorization": "Bearer $token",
                     "Accept": "Accept: application/json"

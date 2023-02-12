@@ -1,4 +1,4 @@
-package com.example.estatio
+package dev.qodestone.estasi
 
 import io.flutter.embedding.android.FlutterActivity
 

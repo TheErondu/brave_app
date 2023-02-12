@@ -1,6 +1,6 @@
-import 'package:estatio/firebase_options.dart';
-import 'package:estatio/src/data/repository/push_repo.dart';
-import 'package:estatio/src/services/applogger_service.dart';
+import 'package:estasi/firebase_options.dart';
+import 'package:estasi/src/data/repository/push_repo.dart';
+import 'package:estasi/src/services/applogger_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
@@ -9,7 +9,7 @@ class PushService {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
-        FirebaseMessaging messaging = FirebaseMessaging.instance;
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
     NotificationSettings settings = await messaging.requestPermission(
       alert: true,
       announcement: false,
@@ -25,7 +25,6 @@ class PushService {
       message: 'User granted permission: ${settings.authorizationStatus}',
     );
   }
-
 
   static void sendUserPushToken() async {
     await FirebaseMessaging.instance.getToken().then((token) {

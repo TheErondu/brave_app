@@ -5,23 +5,23 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "estatio: Attach to Device",
+            "name": "estasi: Attach to Device",
             "type": "dart",
             "request": "attach"
         },
         {
-            "name": "estatio",
+            "name": "estasi",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "estatio (profile mode)",
+            "name": "estasi (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "estatio (release mode)",
+            "name": "estasi (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

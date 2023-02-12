@@ -1,4 +1,3 @@
-import 'package:estatio/src/data/models/device_info_model.dart';
 import 'package:flutter/material.dart';
 
 class ConstantStrings {

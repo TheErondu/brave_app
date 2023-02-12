@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:estatio/src/data/models/device_info_model.dart';
-import 'package:estatio/src/services/storage/device_info_storage_controller.dart';
+import 'package:estasi/src/data/models/device_info_model.dart';
+import 'package:estasi/src/services/storage/device_info_storage_controller.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
@@ -12,6 +12,12 @@ class DeviceInfoService {
     try {
       if (kIsWeb) {
         final deviceData = await deviceInfoPlugin.webBrowserInfo;
+        DeviceInfoData deviceInfoData = DeviceInfoData(
+            deviceName: deviceData.browserName.name,
+            deviceModel: deviceData.userAgent ?? "",
+            os: deviceData.userAgent ?? "",
+            manufacturer: deviceData.vendor ?? "");
+        DeviceInfoStorageService().saveDeviceInfoData(data: deviceInfoData);
       } else {
         if (Platform.isAndroid) {
           final deviceData = await deviceInfoPlugin.androidInfo;

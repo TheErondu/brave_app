@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -25,7 +28,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -43,43 +49,21 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDBmMX-310HihqQfn38fT2wnEEtx4V9uN4',
-    appId: '1:141376676314:web:9d7248f1e165c140e460e3',
-    messagingSenderId: '141376676314',
-    projectId: 'qodestone-estatio',
-    authDomain: 'qodestone-estatio.firebaseapp.com',
-    storageBucket: 'qodestone-estatio.appspot.com',
-    measurementId: 'G-2L9WV5XL4P',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBSLyYFCenKlCXbK6IGRa2zeL1DEfmA6ms',
-    appId: '1:141376676314:android:c7bede22782215d7e460e3',
-    messagingSenderId: '141376676314',
-    projectId: 'qodestone-estatio',
-    storageBucket: 'qodestone-estatio.appspot.com',
+    apiKey: 'AIzaSyDQbHVlUAEvnwHfy51rzpb0V3gDnovKNmI',
+    appId: '1:1011462746759:android:ff84972ef3e4cd35d03e22',
+    messagingSenderId: '1011462746759',
+    projectId: 'estasi-dev',
+    storageBucket: 'estasi-dev.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyB9NQtkauVJ5Ozsa0SoKr74hs8cJgl1HoQ',
-    appId: '1:141376676314:ios:c3be73a98ad0add7e460e3',
-    messagingSenderId: '141376676314',
-    projectId: 'qodestone-estatio',
-    storageBucket: 'qodestone-estatio.appspot.com',
-    androidClientId: '141376676314-apvpop74ptaov1t3af3upna2daa6vd7c.apps.googleusercontent.com',
-    iosClientId: '141376676314-2lt5iepv72b0920cvf8jch8471tumt0e.apps.googleusercontent.com',
-    iosBundleId: 'com.example.estatio',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyB9NQtkauVJ5Ozsa0SoKr74hs8cJgl1HoQ',
-    appId: '1:141376676314:ios:c3be73a98ad0add7e460e3',
-    messagingSenderId: '141376676314',
-    projectId: 'qodestone-estatio',
-    storageBucket: 'qodestone-estatio.appspot.com',
-    androidClientId: '141376676314-apvpop74ptaov1t3af3upna2daa6vd7c.apps.googleusercontent.com',
-    iosClientId: '141376676314-2lt5iepv72b0920cvf8jch8471tumt0e.apps.googleusercontent.com',
-    iosBundleId: 'com.example.estatio',
+    apiKey: 'AIzaSyDPk9kHYFXDQvkyuF-FXJutM-NYqjh5uTc',
+    appId: '1:1011462746759:ios:1bfc1260e883ad6bd03e22',
+    messagingSenderId: '1011462746759',
+    projectId: 'estasi-dev',
+    storageBucket: 'estasi-dev.appspot.com',
+    iosClientId: '1011462746759-m9rbovp3lmr2kad0os4g4fngdacs5568.apps.googleusercontent.com',
+    iosBundleId: 'dev.qodestone.estasi',
   );
 }

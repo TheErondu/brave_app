@@ -1,11 +1,8 @@
-import 'package:estatio/src/components/default_appbar.dart';
+import 'package:estasi/src/components/default_appbar.dart';
 import 'package:flutter/material.dart';
 
 class BaseScaffold extends Scaffold {
-  const BaseScaffold(
-      {
-      this.body,
-      super.key});
+  const BaseScaffold({this.body, super.key});
   @override
   // ignore: overridden_fields
   final Widget? body;

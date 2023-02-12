@@ -1,10 +1,9 @@
-
-import 'package:estatio/src/data/providers/home_page_provider.dart';
-import 'package:estatio/src/features/payments/payments_page_view.dart';
-import 'package:estatio/src/features/activities/activities_page_view.dart';
-import 'package:estatio/src/features/extras/extras_page_view.dart';
-import 'package:estatio/src/features/home_page/home_page_view.dart';
-import 'package:estatio/src/features/security/security_page_view.dart';
+import 'package:estasi/src/data/providers/home_page_provider.dart';
+import 'package:estasi/src/features/payments/payments_page_view.dart';
+import 'package:estasi/src/features/activities/activities_page_view.dart';
+import 'package:estasi/src/features/extras/extras_page_view.dart';
+import 'package:estasi/src/features/home_page/home_page_view.dart';
+import 'package:estasi/src/features/security/security_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -23,12 +22,13 @@ class _IndexViewState extends ConsumerState<IndexView> {
   int activeIndex = 0;
   void _onItemTapped(int index) {
     setState(() {
-      activeIndex = ref.read(indexProvider.state).state=index;
+      activeIndex = ref.read(indexProvider.notifier).state = index;
     });
   }
+
   List<Widget> pages = <Widget>[
     HomePageView(),
-    const ActivitiesPageView(), 
+    const ActivitiesPageView(),
     const PaymentsPageView(),
     const SecurityPageView(),
     const ExtrasPageView()

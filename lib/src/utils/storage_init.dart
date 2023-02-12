@@ -1,12 +1,12 @@
-import 'package:estatio/src/data/models/device_info_model.dart';
-import 'package:estatio/src/data/models/user.dart';
-import 'package:estatio/src/utils/constants.dart';
+import 'package:estasi/src/data/models/device_info_model.dart';
+import 'package:estasi/src/data/models/user.dart';
+import 'package:estasi/src/utils/constants.dart';
 import 'package:hive/hive.dart';
 
 class StorageInit {
-  static void registerAdapters() async{
+  static void registerAdapters() async {
     Hive.registerAdapter(UserDataAdapter());
-     Hive.registerAdapter(DeviceInfoDataAdapter());
+    Hive.registerAdapter(DeviceInfoDataAdapter());
   }
 
   static void openBoxes() {

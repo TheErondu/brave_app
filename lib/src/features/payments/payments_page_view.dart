@@ -1,7 +1,7 @@
-import 'package:estatio/src/components/custom_bottom_sheet.dart';
-import 'package:estatio/src/components/default_appbar.dart';
-import 'package:estatio/src/features/payments/bills_payment_screen.dart';
-import 'package:estatio/src/features/payments/levies_screen.dart';
+import 'package:estasi/src/components/custom_bottom_sheet.dart';
+import 'package:estasi/src/components/default_appbar.dart';
+import 'package:estasi/src/features/payments/bills_payment_screen.dart';
+import 'package:estasi/src/features/payments/levies_screen.dart';
 import 'package:flutter/material.dart';
 
 class PaymentsPageView extends StatefulWidget {
@@ -42,8 +42,8 @@ class _PaymentsPageViewState extends State<PaymentsPageView>
                     shape: BoxShape.rectangle),
                 labelColor: Theme.of(context).colorScheme.onSecondary,
                 unselectedLabelColor: Theme.of(context).colorScheme.onPrimary,
-                labelStyle: Theme.of(context).textTheme.headline2,
-                unselectedLabelStyle: Theme.of(context).textTheme.headline2,
+                labelStyle: Theme.of(context).textTheme.displayMedium,
+                unselectedLabelStyle: Theme.of(context).textTheme.displayMedium,
                 controller: _tabController,
                 overlayColor:
                     MaterialStateColor.resolveWith((Set<MaterialState> states) {

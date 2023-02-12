@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:estatio/src/features/profile/my_profile.dart';
-import 'package:estatio/src/utils/constants.dart';
+import 'package:estasi/src/features/profile/my_profile.dart';
+import 'package:estasi/src/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -20,7 +20,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
         elevation: 0,
         title: Text(
           title ?? "GreenField Estate",
-          style: Theme.of(context).textTheme.headline2,
+          style: Theme.of(context).textTheme.displayMedium,
         ),
         bottom: bottom,
         actions: [

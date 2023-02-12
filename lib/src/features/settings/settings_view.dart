@@ -1,5 +1,5 @@
-import 'package:estatio/src/components/default_appbar.dart';
-import 'package:estatio/src/utils/constants.dart';
+import 'package:estasi/src/components/default_appbar.dart';
+import 'package:estasi/src/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -47,14 +47,14 @@ class SettingsView extends ConsumerWidget {
                           padding: const EdgeInsets.all(8),
                           child: Text(
                             "Settings",
-                            style: Theme.of(context).textTheme.headline1,
+                            style: Theme.of(context).textTheme.displayLarge,
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8),
                           child: Text(
                             "Personalize your experience",
-                            style: Theme.of(context).textTheme.caption,
+                            style: Theme.of(context).textTheme.bodySmall,
                           ),
                         ),
                       ],
@@ -62,7 +62,7 @@ class SettingsView extends ConsumerWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 20),
                       child: Text("Theme mode",
-                          style: Theme.of(context).textTheme.subtitle1),
+                          style: Theme.of(context).textTheme.titleMedium),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(10),
@@ -77,10 +77,10 @@ class SettingsView extends ConsumerWidget {
                               ListTile(
                                 title: Text(
                                   'Use System settings',
-                                  style: Theme.of(context).textTheme.caption,
+                                  style: Theme.of(context).textTheme.bodySmall,
                                 ),
                                 leading: Radio<ThemeMode>(
-                                   activeColor: CustomColors.deepGoldColor,
+                                  activeColor: CustomColors.deepGoldColor,
                                   groupValue: controller.themeMode,
                                   onChanged: ((value) {
                                     controller.updateThemeMode(value);
@@ -91,7 +91,7 @@ class SettingsView extends ConsumerWidget {
                               ListTile(
                                 title: Text(
                                   'Light Mode',
-                                  style: Theme.of(context).textTheme.caption,
+                                  style: Theme.of(context).textTheme.bodySmall,
                                 ),
                                 leading: Radio<ThemeMode>(
                                   activeColor: CustomColors.deepGoldColor,
@@ -105,10 +105,10 @@ class SettingsView extends ConsumerWidget {
                               ListTile(
                                 title: Text(
                                   'Dark Mode',
-                                  style: Theme.of(context).textTheme.caption,
+                                  style: Theme.of(context).textTheme.bodySmall,
                                 ),
                                 leading: Radio<ThemeMode>(
-                                   activeColor: CustomColors.deepGoldColor,
+                                  activeColor: CustomColors.deepGoldColor,
                                   groupValue: controller.themeMode,
                                   onChanged: ((value) {
                                     controller.updateThemeMode(value);

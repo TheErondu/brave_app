@@ -1,14 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:estatio/src/components/default_appbar.dart';
-import 'package:estatio/src/components/profile_action_card_widget.dart';
-import 'package:estatio/src/services/storage/user_storage_controller.dart';
-import 'package:estatio/src/data/models/user.dart';
-import 'package:estatio/src/services/storage_service.dart';
-import 'package:estatio/src/data/repository/user_repo.dart';
-import 'package:estatio/src/features/auth/login_screen.dart';
-import 'package:estatio/src/features/settings/settings_view.dart';
-import 'package:estatio/src/utils/constants.dart';
-import 'package:estatio/src/utils/navigation_service.dart';
+import 'package:estasi/src/components/default_appbar.dart';
+import 'package:estasi/src/components/profile_action_card_widget.dart';
+import 'package:estasi/src/services/storage/user_storage_controller.dart';
+import 'package:estasi/src/data/models/user.dart';
+import 'package:estasi/src/services/storage_service.dart';
+import 'package:estasi/src/data/repository/user_repo.dart';
+import 'package:estasi/src/features/auth/login_screen.dart';
+import 'package:estasi/src/features/settings/settings_view.dart';
+import 'package:estasi/src/utils/constants.dart';
+import 'package:estasi/src/utils/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -53,14 +53,14 @@ class MyProfileScreen extends ConsumerWidget {
                           padding: const EdgeInsets.all(8),
                           child: Text(
                             userData?.name ?? "",
-                            style: Theme.of(context).textTheme.headline1,
+                            style: Theme.of(context).textTheme.displayLarge,
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8),
                           child: Text(
                             userData?.email ?? "",
-                            style: Theme.of(context).textTheme.caption,
+                            style: Theme.of(context).textTheme.bodySmall,
                           ),
                         ),
                       ],
@@ -69,15 +69,15 @@ class MyProfileScreen extends ConsumerWidget {
                       title: "Edit Profile",
                       bgColor: Theme.of(context).colorScheme.primary,
                       icon: const Icon(Icons.person),
-                      onTap: () => Navigator.pushNamed(
-                          context, SettingsView.routeName),
+                      onTap: () =>
+                          Navigator.pushNamed(context, SettingsView.routeName),
                     ),
                     ProfileActionCardWidget(
                       title: "Change Settings",
                       bgColor: Theme.of(context).colorScheme.primary,
                       icon: const Icon(Icons.settings_rounded),
-                      onTap: () => Navigator.pushNamed(
-                          context, SettingsView.routeName),
+                      onTap: () =>
+                          Navigator.pushNamed(context, SettingsView.routeName),
                     ),
                     OutlinedButton(
                         style: OutlinedButton.styleFrom(
@@ -94,7 +94,7 @@ class MyProfileScreen extends ConsumerWidget {
                           UserStorageService().deleteUserData();
                         },
                         child: Text("Logout",
-                            style: Theme.of(context).textTheme.caption))
+                            style: Theme.of(context).textTheme.bodySmall))
                   ],
                 ),
               );

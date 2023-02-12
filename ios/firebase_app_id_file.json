@@ -1,7 +1,7 @@
 {
   "file_generated_by": "FlutterFire CLI",
   "purpose": "FirebaseAppID & ProjectID for this Firebase app in this directory",
-  "GOOGLE_APP_ID": "1:141376676314:ios:c3be73a98ad0add7e460e3",
-  "FIREBASE_PROJECT_ID": "qodestone-estatio",
-  "GCM_SENDER_ID": "141376676314"
+  "GOOGLE_APP_ID": "1:1011462746759:ios:1bfc1260e883ad6bd03e22",
+  "FIREBASE_PROJECT_ID": "estasi-dev",
+  "GCM_SENDER_ID": "1011462746759"
 }

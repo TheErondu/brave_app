@@ -1,4 +1,4 @@
-import 'package:estatio/src/components/default_appbar.dart';
+import 'package:estasi/src/components/default_appbar.dart';
 import 'package:flutter/material.dart';
 
 class SecurityPageView extends StatelessWidget {
@@ -6,11 +6,13 @@ class SecurityPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   return  const Scaffold(
+    return const Scaffold(
       appBar: DefaultAppBar(
         title: "Security",
       ),
-      body: Center(child: Text('Security Page'),),
+      body: Center(
+        child: Text('Security Page'),
+      ),
     );
   }
 }

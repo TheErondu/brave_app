@@ -1,8 +1,9 @@
-import 'package:estatio/globals.dart';
-import 'package:estatio/src/services/applogger_service.dart';
-import 'package:estatio/src/services/notifications/push_service.dart';
-import 'package:estatio/src/utils/config.dart';
-import 'package:estatio/src/utils/storage_init.dart';
+import 'package:estasi/globals.dart';
+import 'package:estasi/src/data/repository/init.dart';
+import 'package:estasi/src/services/applogger_service.dart';
+import 'package:estasi/src/services/notifications/push_service.dart';
+import 'package:estasi/src/utils/config.dart';
+import 'package:estasi/src/utils/storage_init.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -19,8 +20,10 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
   await Firebase.initializeApp();
-  print("Handling a background message: ${message.messageId}");
+  AppLoggerService.showLog(
+      message: "Handling a background message: ${message.messageId}");
 }
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await loadEnvFile();
@@ -66,4 +69,5 @@ void main() async {
         /// is enabled for release mode and vice-versa.
         ProviderScope(child: MyApp(settingsController: settingsController)));
   });
+  await Init().pingServer();
 }

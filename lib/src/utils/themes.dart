@@ -1,8 +1,8 @@
-import 'package:estatio/src/utils/constants.dart';
+import 'package:estasi/src/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme {
- AppTheme._();
+  AppTheme._();
   static final ThemeData lightTheme = ThemeData(
     scaffoldBackgroundColor: Colors.white,
     fontFamily: 'Quicksand',
@@ -12,17 +12,15 @@ class AppTheme {
         color: Colors.black,
       ),
     ),
-    outlinedButtonTheme: OutlinedButtonThemeData(style:ButtonStyle(
-      side: MaterialStateProperty.all(const BorderSide(
-                        color: Colors.white,
-                        width: 2.0,
-                        style: BorderStyle.solid))
-    )) ,
+    outlinedButtonTheme: OutlinedButtonThemeData(
+        style: ButtonStyle(
+            side: MaterialStateProperty.all(const BorderSide(
+                color: Colors.white, width: 2.0, style: BorderStyle.solid)))),
     colorScheme: const ColorScheme.light(
         primary: Colors.white,
         inversePrimary: Colors.black,
         onPrimary: Colors.black,
-        secondary:Color(0xFF977934),
+        secondary: Color(0xFF977934),
         surface: Colors.green,
         onSecondary: Colors.white,
         shadow: Colors.black,
@@ -34,28 +32,31 @@ class AppTheme {
       color: Colors.black,
     ),
     textTheme: const TextTheme(
-       bodyText1:TextStyle(
-          color: Colors.black, fontSize: 12.0, fontWeight: FontWeight.w600) ,
-      button: TextStyle(
-          color: CustomColors.deepGoldColor, fontSize: 12.0, fontWeight: FontWeight.w700),
-      headline1: TextStyle(
+      bodyLarge: TextStyle(
+          color: Colors.black, fontSize: 12.0, fontWeight: FontWeight.w600),
+      labelLarge: TextStyle(
+          color: CustomColors.deepGoldColor,
+          fontSize: 12.0,
+          fontWeight: FontWeight.w700),
+      displayLarge: TextStyle(
           color: Colors.black, fontSize: 35.0, fontWeight: FontWeight.w700),
-      headline2: TextStyle(
+      displayMedium: TextStyle(
           color: Colors.black, fontSize: 22.0, fontWeight: FontWeight.w700),
-      headline3: TextStyle(
+      displaySmall: TextStyle(
           color: Colors.black, fontSize: 16.0, fontWeight: FontWeight.w700),
-      subtitle1: TextStyle(
+      titleMedium: TextStyle(
           color: Colors.black, fontSize: 18.0, fontWeight: FontWeight.w600),
-      subtitle2: TextStyle(
+      titleSmall: TextStyle(
         color: Colors.black,
         fontWeight: FontWeight.w700,
         fontSize: 18.0,
       ),
-      headline6: TextStyle(
+      titleLarge: TextStyle(
           color: Colors.white70, fontSize: 16.0, fontWeight: FontWeight.w700),
-         caption:  TextStyle(
-          color: CustomColors.deepGoldColor, fontSize: 16.0, fontWeight: FontWeight.w700),
-          
+      bodySmall: TextStyle(
+          color: CustomColors.deepGoldColor,
+          fontSize: 16.0,
+          fontWeight: FontWeight.w700),
     ),
   );
 
@@ -65,13 +66,13 @@ class AppTheme {
     appBarTheme: const AppBarTheme(
       color: Colors.black,
       iconTheme: IconThemeData(
-        color:Color(0xFF977934),
+        color: Color(0xFF977934),
       ),
     ),
     colorScheme: ColorScheme.dark(
         primary: Colors.grey.shade900,
         onPrimary: Colors.white,
-        secondary:const Color(0xFF977934),
+        secondary: const Color(0xFF977934),
         onSecondary: Colors.white,
         shadow: Colors.black,
         surface: Colors.green,
@@ -84,28 +85,32 @@ class AppTheme {
       color: Colors.white54,
     ),
     textTheme: const TextTheme(
-      bodyText1:TextStyle(
-          color: Colors.white, fontSize: 12.0, fontWeight: FontWeight.w600) ,
-       button: TextStyle(
-          color: CustomColors.deepGoldColor, fontSize: 12.0, fontWeight: FontWeight.w700),
-      headline1: TextStyle(
+      bodyLarge: TextStyle(
+          color: Colors.white, fontSize: 12.0, fontWeight: FontWeight.w600),
+      labelLarge: TextStyle(
+          color: CustomColors.deepGoldColor,
+          fontSize: 12.0,
+          fontWeight: FontWeight.w700),
+      displayLarge: TextStyle(
           color: Colors.white, fontSize: 35.0, fontWeight: FontWeight.w700),
-      headline2: TextStyle(
+      displayMedium: TextStyle(
           color: Colors.white, fontSize: 22.0, fontWeight: FontWeight.w700),
-      headline3: TextStyle(
+      displaySmall: TextStyle(
           color: Colors.white, fontSize: 16.0, fontWeight: FontWeight.w700),
-      headline5: TextStyle(
+      headlineSmall: TextStyle(
           color: Colors.white, fontSize: 23.0, fontWeight: FontWeight.w700),
-      subtitle1: TextStyle(
+      titleMedium: TextStyle(
           color: Colors.white70, fontSize: 18.0, fontWeight: FontWeight.w600),
-      subtitle2: TextStyle(
+      titleSmall: TextStyle(
         color: Colors.white70,
         fontWeight: FontWeight.w600,
         fontSize: 18.0,
       ),
-      caption:  TextStyle(
-          color: CustomColors.deepGoldColor, fontSize: 16.0, fontWeight: FontWeight.w700),
-      headline6: TextStyle(
+      bodySmall: TextStyle(
+          color: CustomColors.deepGoldColor,
+          fontSize: 16.0,
+          fontWeight: FontWeight.w700),
+      titleLarge: TextStyle(
           color: Colors.white70, fontSize: 16.0, fontWeight: FontWeight.w700),
     ),
   );

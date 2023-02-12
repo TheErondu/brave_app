@@ -1,9 +1,9 @@
-import 'package:estatio/src/data/models/device_info_model.dart';
-import 'package:estatio/src/utils/constants.dart';
+import 'package:estasi/src/data/models/device_info_model.dart';
+import 'package:estasi/src/utils/constants.dart';
 import 'package:hive/hive.dart';
 
 class DeviceInfoStorageService {
- saveDeviceInfoData({required DeviceInfoData data}) {
+  saveDeviceInfoData({required DeviceInfoData data}) {
     var box = Hive.box(ConstantStrings.deviceInfo);
     box.put(ConstantStrings.deviceInfo, data);
   }

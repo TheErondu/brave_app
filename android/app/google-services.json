@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1011462746759",
+    "project_id": "estasi-dev",
+    "storage_bucket": "estasi-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1011462746759:android:ff84972ef3e4cd35d03e22",
+        "android_client_info": {
+          "package_name": "dev.qodestone.estasi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1011462746759-u9e9qcsn0mdnsstm897bd4mnpi9cqbfa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQbHVlUAEvnwHfy51rzpb0V3gDnovKNmI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1011462746759-u9e9qcsn0mdnsstm897bd4mnpi9cqbfa.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1011462746759-m9rbovp3lmr2kad0os4g4fngdacs5568.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "dev.qodestone.estasi"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

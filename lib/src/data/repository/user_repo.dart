@@ -1,11 +1,11 @@
-import 'package:estatio/src/services/notifications/push_service.dart';
-import 'package:estatio/src/services/storage/user_storage_controller.dart';
-import 'package:estatio/src/data/models/generic_resonse_model.dart';
-import 'package:estatio/src/data/models/user.dart';
-import 'package:estatio/src/services/api_service.dart';
-import 'package:estatio/src/utils/api_endpoins.dart';
-import 'package:estatio/src/data/models/auth_response.dart';
-import 'package:estatio/src/services/storage_service.dart';
+import 'package:estasi/src/services/notifications/push_service.dart';
+import 'package:estasi/src/services/storage/user_storage_controller.dart';
+import 'package:estasi/src/data/models/generic_resonse_model.dart';
+import 'package:estasi/src/data/models/user.dart';
+import 'package:estasi/src/services/api_service.dart';
+import 'package:estasi/src/utils/api_endpoins.dart';
+import 'package:estasi/src/data/models/auth_response.dart';
+import 'package:estasi/src/services/storage_service.dart';
 
 class UserRepository {
   Future<User?> getUserInfo() async {

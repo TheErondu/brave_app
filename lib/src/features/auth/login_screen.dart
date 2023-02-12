@@ -1,5 +1,5 @@
-import 'package:estatio/src/utils/constants.dart';
-import 'package:estatio/src/utils/navigation_service.dart';
+import 'package:estasi/src/utils/constants.dart';
+import 'package:estasi/src/utils/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -30,7 +30,7 @@ class _LoginViewState extends State<LoginView> {
                     alignment: Alignment.center,
                     padding: const EdgeInsets.all(10),
                     child: Text(
-                      'Sign in to Estatio',
+                      'Sign in to estasi',
                       style: TextStyle(
                           color: Theme.of(context).colorScheme.secondary,
                           fontWeight: FontWeight.w500,
@@ -111,7 +111,7 @@ class _LoginViewState extends State<LoginView> {
                   },
                   child: Text(
                     'Forgot Password',
-                    style: Theme.of(context).textTheme.button,
+                    style: Theme.of(context).textTheme.labelLarge,
                   ),
                 ),
                 Consumer(
@@ -126,7 +126,7 @@ class _LoginViewState extends State<LoginView> {
                                   const Color.fromARGB(255, 158, 127, 24))),
                           onPressed: () async {
                             if (!_formKey.currentState!.validate()) return;
-                            ref.read(isLoadingProvider.state).state = true;
+                            ref.read(isLoadingProvider.notifier).state = true;
                             NavigationService.handleLogin(
                                 context: context,
                                 ref: ref,
