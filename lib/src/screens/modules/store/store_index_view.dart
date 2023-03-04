@@ -4,14 +4,14 @@ import 'package:brave/src/screens/modules/store/bills_payment_screen.dart';
 import 'package:brave/src/screens/modules/store/levies_screen.dart';
 import 'package:flutter/material.dart';
 
-class PaymentsPageView extends StatefulWidget {
-  const PaymentsPageView({super.key});
+class StoreIndexView extends StatefulWidget {
+  const StoreIndexView({super.key});
 
   @override
-  State<PaymentsPageView> createState() => _PaymentsPageViewState();
+  State<StoreIndexView> createState() => _StoreIndexViewState();
 }
 
-class _PaymentsPageViewState extends State<PaymentsPageView>
+class _StoreIndexViewState extends State<StoreIndexView>
     with TickerProviderStateMixin {
   final List<Widget> payments = [
     const LeviesPaymentScreen(),
@@ -28,7 +28,7 @@ class _PaymentsPageViewState extends State<PaymentsPageView>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const DefaultAppBar(
-        title: "Payments",
+        title: "Store Manager",
       ),
       body: Column(
         children: [

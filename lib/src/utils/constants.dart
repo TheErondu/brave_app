@@ -12,7 +12,6 @@ final Map<List<String>, IconData> quicklinks = {
   ["Administration", "/administration"]: Icons.admin_panel_settings,
   ["Request item(s)", "/adverts"]: Icons.shopping_cart_checkout_rounded,
   ["My Profile", "/profile"]: Icons.person_rounded,
-  ["Settings", "/settings"]: Icons.settings,
 };
 final Map<List<String>, IconData> stats = {
   ["Users", "2"]: Icons.person_rounded,

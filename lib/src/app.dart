@@ -1,20 +1,20 @@
 import 'package:brave/src/data/models/user.dart';
-import 'package:brave/src/services/storage/user_storage_service.dart';
-import 'package:brave/src/screens/auth/login_screen.dart';
-import 'package:brave/src/screens/home_page/home_page_view.dart';
-import 'package:brave/src/screens/profile/my_profile.dart';
+import 'package:brave/src/data/providers/settings_provider.dart';
 import 'package:brave/src/index/index_view.dart';
+import 'package:brave/src/screens/auth/login_screen.dart';
+import 'package:brave/src/services/storage/user_storage_service.dart';
 import 'package:brave/src/services/navigation_service.dart';
+import 'package:brave/src/utils/routes.dart';
 import 'package:brave/src/utils/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'screens/settings/settings_controller.dart';
-import 'screens/settings/settings_view.dart';
 
 /// The Widget that configures your application.
-class App extends StatelessWidget {
+class App extends ConsumerWidget {
   const App({
     Key? key,
     required this.settingsController,
@@ -23,7 +23,10 @@ class App extends StatelessWidget {
   final SettingsController settingsController;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) => ref
+        .read(settingsControllerProvider.notifier)
+        .state = settingsController);
     // Glue the SettingsController to the MaterialApp.
     //
     // The AnimatedBuilder Widget listens to the SettingsController for changes.
@@ -70,30 +73,11 @@ class App extends StatelessWidget {
                 theme: AppTheme.lightTheme,
                 darkTheme: AppTheme.darkTheme,
                 themeMode: settingsController.themeMode,
-                initialRoute: user == null ? "/login" : "/",
+                initialRoute:
+                    user == null ? LoginView.routeName : IndexView.routeName,
                 // Define a function to handle named routes in order to support
                 // Flutter web url navigation and deep linking.
-                onGenerateRoute: (RouteSettings routeSettings) {
-                  return MaterialPageRoute<void>(
-                    settings: routeSettings,
-                    builder: (BuildContext context) {
-                      switch (routeSettings.name) {
-                        case SettingsView.routeName:
-                          return SettingsView(controller: settingsController);
-                        case HomePageView.routeName:
-                          return HomePageView();
-                        case LoginView.routeName:
-                          return const LoginView();
-                        case IndexView.routeName:
-                          return  IndexView(settingsController: settingsController,);
-                        case MyProfileScreen.routeName:
-                          return const MyProfileScreen();
-                        default:
-                          return IndexView(settingsController: settingsController,);
-                      }
-                    },
-                  );
-                },
+                routes: appRoutes,
               );
             });
       },

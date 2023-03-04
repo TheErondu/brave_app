@@ -9,7 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomePageView extends ConsumerWidget {
-  HomePageView({Key? key}) : super(key: key);
+ HomePageView({Key? key}) : super(key: key);
   static const routeName = '/home';
 
   final String greeting = Bonjour().greeting();

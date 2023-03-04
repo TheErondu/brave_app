@@ -1,4 +1,5 @@
 import 'package:brave/src/components/default_appbar.dart';
+import 'package:brave/src/data/providers/settings_provider.dart';
 import 'package:brave/src/services/storage/device_info_storage_service.dart';
 import 'package:brave/src/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -13,14 +14,12 @@ import 'settings_controller.dart';
 class SettingsView extends ConsumerWidget {
   const SettingsView({
     Key? key,
-    required this.controller,
   }) : super(key: key);
 
   static const routeName = '/settings';
-
-  final SettingsController controller;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final SettingsController? controller = ref.watch(settingsControllerProvider);
     final device = DeviceInfoStorageService().loadDeviceInfoData();
     return Scaffold(
         appBar: const DefaultAppBar(title: "Settings"),
@@ -83,9 +82,9 @@ class SettingsView extends ConsumerWidget {
                                 ),
                                 leading: Radio<ThemeMode>(
                                   activeColor: CustomColors.deepGoldColor,
-                                  groupValue: controller.themeMode,
+                                  groupValue: controller?.themeMode,
                                   onChanged: ((value) {
-                                    controller.updateThemeMode(value);
+                                    controller?.updateThemeMode(value);
                                   }),
                                   value: ThemeMode.system,
                                 ),
@@ -97,9 +96,9 @@ class SettingsView extends ConsumerWidget {
                                 ),
                                 leading: Radio<ThemeMode>(
                                   activeColor: CustomColors.deepGoldColor,
-                                  groupValue: controller.themeMode,
+                                  groupValue: controller?.themeMode,
                                   onChanged: ((value) {
-                                    controller.updateThemeMode(value);
+                                    controller?.updateThemeMode(value);
                                   }),
                                   value: ThemeMode.light,
                                 ),
@@ -111,9 +110,9 @@ class SettingsView extends ConsumerWidget {
                                 ),
                                 leading: Radio<ThemeMode>(
                                   activeColor: CustomColors.deepGoldColor,
-                                  groupValue: controller.themeMode,
+                                  groupValue: controller?.themeMode,
                                   onChanged: ((value) {
-                                    controller.updateThemeMode(value);
+                                    controller?.updateThemeMode(value);
                                   }),
                                   value: ThemeMode.dark,
                                 ),
