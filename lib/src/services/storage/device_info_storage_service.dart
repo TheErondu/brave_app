@@ -1,5 +1,5 @@
-import 'package:estasi/src/data/models/device_info_model.dart';
-import 'package:estasi/src/utils/constants.dart';
+import 'package:brave/src/data/models/device_info_model.dart';
+import 'package:brave/src/utils/constants.dart';
 import 'package:hive/hive.dart';
 
 class DeviceInfoStorageService {

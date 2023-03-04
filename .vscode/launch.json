@@ -5,23 +5,23 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "estasi: Attach to Device",
+            "name": "brave: Attach to Device",
             "type": "dart",
             "request": "attach"
         },
         {
-            "name": "estasi",
+            "name": "brave",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "estasi (profile mode)",
+            "name": "brave (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "estasi (release mode)",
+            "name": "brave (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

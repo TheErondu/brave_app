@@ -1,4 +1,4 @@
-import 'package:estasi/src/components/default_appbar.dart';
+import 'package:brave/src/components/default_appbar.dart';
 import 'package:flutter/material.dart';
 
 class BaseScaffold extends Scaffold {

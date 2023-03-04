@@ -1,5 +1,5 @@
-import 'package:estasi/src/utils/constants.dart';
-import 'package:estasi/src/utils/navigation_service.dart';
+import 'package:brave/src/utils/constants.dart';
+import 'package:brave/src/services/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -30,7 +30,7 @@ class _LoginViewState extends State<LoginView> {
                     alignment: Alignment.center,
                     padding: const EdgeInsets.all(10),
                     child: Text(
-                      'Sign in to estasi',
+                      'Sign in to brave',
                       style: TextStyle(
                           color: Theme.of(context).colorScheme.secondary,
                           fontWeight: FontWeight.w500,

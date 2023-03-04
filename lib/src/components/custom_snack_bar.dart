@@ -1,5 +1,5 @@
-import 'package:estasi/src/features/auth/login_screen.dart';
-import 'package:estasi/src/utils/navigation_service.dart';
+import 'package:brave/src/screens/auth/login_screen.dart';
+import 'package:brave/src/services/navigation_service.dart';
 import 'package:flutter/material.dart';
 
 class CustomSnackBar {

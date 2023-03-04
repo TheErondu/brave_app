@@ -1,37 +1,26 @@
-import 'package:estasi/globals.dart';
-import 'package:estasi/src/data/repository/init.dart';
-import 'package:estasi/src/services/applogger_service.dart';
-import 'package:estasi/src/services/notifications/push_service.dart';
-import 'package:estasi/src/utils/config.dart';
-import 'package:estasi/src/utils/storage_init.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:brave/globals.dart';
+import 'package:brave/src/data/repository/init.dart';
+import 'package:brave/src/services/device_info_service.dart';
+import 'package:brave/src/utils/config.dart';
+import 'package:brave/src/utils/storage_init.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'src/app.dart';
-import 'src/features/settings/settings_controller.dart';
-import 'src/features/settings/settings_service.dart';
-
-@pragma('vm:entry-point')
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  // If you're going to use other Firebase services in the background, such as Firestore,
-  // make sure you call `initializeApp` before using other Firebase services.
-  await Firebase.initializeApp();
-  AppLoggerService.showLog(
-      message: "Handling a background message: ${message.messageId}");
-}
+import 'src/screens/settings/settings_controller.dart';
+import 'src/screens/settings/settings_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await loadEnvFile();
 //initlize Box Storage
   await Hive.initFlutter();
-  StorageInit.registerAdapters();
-  StorageInit.openBoxes();
-  PushService.init();
+  await StorageInit.registerAdapters();
+  await StorageInit.openBoxes();
+  await DeviceInfoService().initPlatformState();
+  //PushService.init();
   // Set up the SettingsController, which will glue user settings to multiple
   // Flutter Widgets.
   final settingsController = SettingsController(SettingsService());
@@ -43,14 +32,6 @@ void main() async {
   // Run the app and pass in the SettingsController. The app listens to the
   // SettingsController for changes, then passes it further down to the
   // SettingsView.
-
-//handle Foreground Push notifications
-  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    AppLoggerService.showLog(
-        title: 'Got a message whilst in the foreground!',
-        message: message.notification.toString(),
-        data: message.data);
-  });
 
   Global.environmentVariables = EnvironmentVariables(
       apiBaseUrl: dotenv.env['BASE_URL']!,
@@ -67,7 +48,8 @@ void main() async {
         ///This allows you to run the app in different views and Screen sizes,
         /// when the [kReleaseMode] is true it means that the app preview view
         /// is enabled for release mode and vice-versa.
-        ProviderScope(child: MyApp(settingsController: settingsController)));
+        ProviderScope(child: App(settingsController: settingsController)));
   });
+
   await Init().pingServer();
 }

@@ -1,6 +1,6 @@
-import 'package:estasi/src/data/repository/user_repo.dart';
-import 'package:estasi/src/features/auth/login_screen.dart';
-import 'package:estasi/src/index/index_view.dart';
+import 'package:brave/src/data/repository/user_repo.dart';
+import 'package:brave/src/screens/auth/login_screen.dart';
+import 'package:brave/src/index/index_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

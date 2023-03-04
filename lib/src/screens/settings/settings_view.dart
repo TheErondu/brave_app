@@ -1,5 +1,6 @@
-import 'package:estasi/src/components/default_appbar.dart';
-import 'package:estasi/src/utils/constants.dart';
+import 'package:brave/src/components/default_appbar.dart';
+import 'package:brave/src/services/storage/device_info_storage_service.dart';
+import 'package:brave/src/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -20,6 +21,7 @@ class SettingsView extends ConsumerWidget {
   final SettingsController controller;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final device = DeviceInfoStorageService().loadDeviceInfoData();
     return Scaffold(
         appBar: const DefaultAppBar(title: "Settings"),
         body: SingleChildScrollView(
@@ -116,6 +118,10 @@ class SettingsView extends ConsumerWidget {
                                   value: ThemeMode.dark,
                                 ),
                               ),
+                              Center(
+                                child: Text(
+                                    "Device : ${device?.manufacturer} - ${device?.deviceModel}"),
+                              )
                             ],
                           )),
                     ),

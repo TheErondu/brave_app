@@ -1,5 +1,5 @@
-import 'package:estasi/src/data/models/user.dart';
-import 'package:estasi/src/utils/constants.dart';
+import 'package:brave/src/data/models/user.dart';
+import 'package:brave/src/utils/constants.dart';
 import 'package:hive/hive.dart';
 
 class UserStorageService {

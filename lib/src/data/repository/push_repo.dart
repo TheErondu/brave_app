@@ -1,6 +1,6 @@
-import 'package:estasi/src/services/api_service.dart';
-import 'package:estasi/src/services/applogger_service.dart';
-import 'package:estasi/src/utils/api_endpoins.dart';
+import 'package:brave/src/services/api_service.dart';
+import 'package:brave/src/services/applogger_service.dart';
+import 'package:brave/src/utils/api_endpoins.dart';
 
 class PushRepository {
   Future<void> sendToken({required String token}) async {

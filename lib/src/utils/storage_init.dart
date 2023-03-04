@@ -1,15 +1,16 @@
-import 'package:estasi/src/data/models/device_info_model.dart';
-import 'package:estasi/src/data/models/user.dart';
-import 'package:estasi/src/utils/constants.dart';
+import 'package:brave/src/data/models/device_info_model.dart';
+import 'package:brave/src/data/models/user.dart';
+import 'package:brave/src/utils/constants.dart';
 import 'package:hive/hive.dart';
 
 class StorageInit {
-  static void registerAdapters() async {
+  static Future<void> registerAdapters() async {
     Hive.registerAdapter(UserDataAdapter());
     Hive.registerAdapter(DeviceInfoDataAdapter());
   }
 
-  static void openBoxes() {
+  static Future <void> openBoxes() async {
+  await  Hive.openBox(ConstantStrings.deviceInfo);
     Hive.openBox('auth');
     Hive.openBox(ConstantStrings.userData);
   }

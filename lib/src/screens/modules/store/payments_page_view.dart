@@ -1,7 +1,7 @@
-import 'package:estasi/src/components/custom_bottom_sheet.dart';
-import 'package:estasi/src/components/default_appbar.dart';
-import 'package:estasi/src/features/payments/bills_payment_screen.dart';
-import 'package:estasi/src/features/payments/levies_screen.dart';
+import 'package:brave/src/components/custom_bottom_sheet.dart';
+import 'package:brave/src/components/default_appbar.dart';
+import 'package:brave/src/screens/modules/store/bills_payment_screen.dart';
+import 'package:brave/src/screens/modules/store/levies_screen.dart';
 import 'package:flutter/material.dart';
 
 class PaymentsPageView extends StatefulWidget {

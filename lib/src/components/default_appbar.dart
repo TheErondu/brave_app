@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:estasi/src/features/profile/my_profile.dart';
-import 'package:estasi/src/utils/constants.dart';
+import 'package:brave/src/screens/profile/my_profile.dart';
+import 'package:brave/src/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -19,7 +19,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
         automaticallyImplyLeading: false,
         elevation: 0,
         title: Text(
-          title ?? "GreenField Estate",
+          title ?? "Brave Media workflow",
           style: Theme.of(context).textTheme.displayMedium,
         ),
         bottom: bottom,

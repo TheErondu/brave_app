@@ -1,4 +1,4 @@
-package dev.qodestone.estasi
+package media.bravetech.app
 
 import io.flutter.embedding.android.FlutterActivity
 

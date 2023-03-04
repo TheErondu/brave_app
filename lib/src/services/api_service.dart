@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:estasi/globals.dart';
-import 'package:estasi/src/data/models/generic_resonse_model.dart';
-import 'package:estasi/src/services/applogger_service.dart';
-import 'package:estasi/src/services/storage_service.dart';
-import 'package:estasi/src/utils/navigation_service.dart';
+import 'package:brave/globals.dart';
+import 'package:brave/src/data/models/generic_resonse_model.dart';
+import 'package:brave/src/services/applogger_service.dart';
+import 'package:brave/src/services/storage_service.dart';
+import 'package:brave/src/services/navigation_service.dart';
 import 'package:flutter/material.dart';
 
 enum RequestMethod {
@@ -25,6 +25,31 @@ class ApiService extends ChangeNotifier {
       required RequestMethod method}) async {
     GenericResponse? response;
     final Dio httpRequest = Dio();
+
+    /// Logging Inteceptors/////////////
+    httpRequest.interceptors
+        .add(InterceptorsWrapper(onRequest: (options, handler) {
+      AppLoggerService.showLog(
+          title: '${options.method} Request}',
+          message: "--> ${options.method} ${options.uri}",
+          data: options.data);
+      return handler.next(options);
+    }, onResponse: (response, handler) {
+      AppLoggerService.showLog(
+         status: response.statusCode,
+          message: "<-- ${response.requestOptions.uri}",
+          data: response.data
+          );
+      return handler.next(response);
+    }, onError: (DioError e, handler) {
+      AppLoggerService.showLog(
+          status: e.response?.statusCode,
+          message: "<-- ${e.response?.requestOptions.uri}",
+          data: e.response?.data
+          );
+      return handler.next(e);
+    }));
+    ///////////////Store Token
     String? token = await StorageService().readBox("auth", "token");
     if (method == RequestMethod.get) {
       try {
@@ -47,23 +72,11 @@ class ApiService extends ChangeNotifier {
       } on DioError catch (e) {
         // The request was made and the server responded with a status code
         // that falls out of the range of 2xx and is also not 304.
-
-        AppLoggerService.showLog(
-            title: "Dio error",
-            status: e.response?.statusCode,
-            data: e.response?.data,
-            message: e.response?.statusMessage);
         if (e.response?.statusCode == 401) {
           response = GenericResponse.fromJson(e.response?.data);
           NavigationService.toLogin(
               context: NavigationService.navigatorKey.currentContext!);
         } else {
-          AppLoggerService.showLog(
-              title: "Dio Success",
-              status: e.response?.statusCode,
-              data: e.response?.data,
-              message: e.response?.statusMessage);
-          response = GenericResponse.fromJson(e.response?.data);
         }
       }
     } else if (method == RequestMethod.post) {
@@ -80,11 +93,7 @@ class ApiService extends ChangeNotifier {
                   }),
             data: requestData);
         if (res.statusCode == 200) {
-          AppLoggerService.showLog(
-              title: "Dio Success",
-              status: res.statusCode,
-              data: res.data,
-              message: res.statusMessage);
+       
           return GenericResponse.fromJson(res.data);
         } else {
           return GenericResponse.fromJson(res.data);
@@ -92,11 +101,6 @@ class ApiService extends ChangeNotifier {
       } on DioError catch (e) {
         // The request was made and the server responded with a status code
         // that falls out of the range of 2xx and is also not 304.
-        AppLoggerService.showLog(
-            title: "Dio error",
-            status: e.response?.statusCode,
-            data: e.response?.data,
-            message: e.response?.statusMessage);
         response = GenericResponse.fromJson(e.response?.data);
       }
     }

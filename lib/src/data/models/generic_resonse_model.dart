@@ -11,10 +11,10 @@ class GenericResponse {
   late  dynamic errors=[];
 
   GenericResponse.fromJson(Map<String, dynamic> json) {
-    success = json['success'];
-    message = json['message'];
-    data = json['data'];
-    errors = json['errors'];
+    success = json['success']??success;
+    message = json['message']??message;
+    data = json['data']??data;
+    errors = json['errors']??errors;
   }
 
   Map<String, dynamic> toJson() {

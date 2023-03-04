@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:estasi/src/data/models/device_info_model.dart';
-import 'package:estasi/src/services/storage/device_info_storage_controller.dart';
+import 'package:brave/src/data/models/device_info_model.dart';
+import 'package:brave/src/services/storage/device_info_storage_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
@@ -22,7 +22,7 @@ class DeviceInfoService {
         if (Platform.isAndroid) {
           final deviceData = await deviceInfoPlugin.androidInfo;
           DeviceInfoData deviceInfoData = DeviceInfoData(
-              deviceName: deviceData.device,
+              deviceName: deviceData.board,
               deviceModel: deviceData.model,
               os: deviceData.version.release,
               manufacturer: deviceData.manufacturer);

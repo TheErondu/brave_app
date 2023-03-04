@@ -1,17 +1,19 @@
-import 'package:estasi/src/data/providers/home_page_provider.dart';
-import 'package:estasi/src/features/payments/payments_page_view.dart';
-import 'package:estasi/src/features/activities/activities_page_view.dart';
-import 'package:estasi/src/features/extras/extras_page_view.dart';
-import 'package:estasi/src/features/home_page/home_page_view.dart';
-import 'package:estasi/src/features/security/security_page_view.dart';
+import 'package:brave/src/data/providers/home_page_provider.dart';
+import 'package:brave/src/screens/home_page/home_page_view.dart';
+import 'package:brave/src/screens/modules/analytics/activities_page_view.dart';
+import 'package:brave/src/screens/modules/store/payments_page_view.dart';
+import 'package:brave/src/screens/settings/settings_controller.dart';
+import 'package:brave/src/screens/settings/settings_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class IndexView extends ConsumerStatefulWidget {
   const IndexView({
     Key? key,
+   required this.settingsController,
   }) : super(key: key);
   static const routeName = '/';
+    final SettingsController settingsController;
   @override
   ConsumerState<IndexView> createState() => _IndexViewState();
 }
@@ -26,12 +28,15 @@ class _IndexViewState extends ConsumerState<IndexView> {
     });
   }
 
-  List<Widget> pages = <Widget>[
+ 
+
+  @override
+  Widget build(BuildContext context) {
+     List<Widget> pages = <Widget>[
     HomePageView(),
     const ActivitiesPageView(),
     const PaymentsPageView(),
-    const SecurityPageView(),
-    const ExtrasPageView()
+     SettingsView(controller:widget.settingsController ,),
   ];
   List<BottomNavigationBarItem> navItems = <BottomNavigationBarItem>[
     const BottomNavigationBarItem(
@@ -39,25 +44,18 @@ class _IndexViewState extends ConsumerState<IndexView> {
       label: 'Home',
     ),
     const BottomNavigationBarItem(
-      icon: Icon(Icons.event),
-      label: 'Activities',
+      icon: Icon(Icons.widgets),
+      label: 'Modules',
     ),
     const BottomNavigationBarItem(
-      icon: Icon(Icons.account_balance),
-      label: 'Payments',
+      icon: Icon(Icons.insights),
+      label: 'Analytics',
     ),
     const BottomNavigationBarItem(
-      icon: Icon(Icons.local_police_rounded),
-      label: 'Security',
-    ),
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.theater_comedy_rounded),
-      label: 'Extras',
+      icon: Icon(Icons.settings_rounded),
+      label: 'Settings',
     ),
   ];
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: pages.elementAt(activeIndex),

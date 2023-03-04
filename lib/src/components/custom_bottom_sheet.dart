@@ -1,4 +1,4 @@
-import 'package:estasi/src/utils/constants.dart';
+import 'package:brave/src/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomBotttomSheet extends StatelessWidget {

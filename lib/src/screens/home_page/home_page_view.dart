@@ -1,15 +1,12 @@
-// ignore_for_file: unnecessary_new
-
 import 'dart:developer';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:estasi/src/components/default_appbar.dart';
-import 'package:estasi/src/services/storage/user_storage_controller.dart';
-import 'package:estasi/src/data/models/user.dart';
-import 'package:estasi/src/utils/bonjour.dart';
-import 'package:estasi/src/utils/constants.dart';
+import 'package:brave/src/components/default_appbar.dart';
+import 'package:brave/src/services/storage/user_storage_service.dart';
+import 'package:brave/src/data/models/user.dart';
+import 'package:brave/src/utils/bonjour.dart';
+import 'package:brave/src/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomePageView extends ConsumerWidget {
   HomePageView({Key? key}) : super(key: key);
@@ -24,7 +21,7 @@ class HomePageView extends ConsumerWidget {
       appBar: const DefaultAppBar(),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 15),
-        height: MediaQuery.of(context).size.height,
+        height: 1.sh,
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,48 +30,58 @@ class HomePageView extends ConsumerWidget {
                 "$greeting,\n${user?.name}👋",
                 style: Theme.of(context).textTheme.displayLarge,
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(0),
-                child: CarouselSlider(
-                  items: imgList
-                      .map((item) => ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: CachedNetworkImage(
-                                errorWidget: (context, url, error) {
-                                  return Text(error);
-                                },
-                                progressIndicatorBuilder:
-                                    (context, url, progress) {
-                                  return const SizedBox(
-                                      width: 4,
-                                      height: 4,
-                                      child: Center(
-                                          child: CircularProgressIndicator()));
-                                },
-                                imageUrl: item,
-                                fit: BoxFit.cover,
-                                height: MediaQuery.of(context).size.height / 7,
-                                width: MediaQuery.of(context).size.width),
-                          ))
-                      .toList(),
-                  options: CarouselOptions(
-                    autoPlay: true,
-                    autoPlayInterval: const Duration(seconds: 3),
-                    autoPlayAnimationDuration:
-                        const Duration(milliseconds: 800),
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    enlargeCenterPage: true,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
+              SizedBox(height: 20.h,),
               SizedBox(
-                height: MediaQuery.of(context).size.height *
-                    quicklinks.length *
-                    0.045,
+                height: 1.sh * stats.length * 0.045,
+                child: GridView.count(
+                    // Create a grid with 2 columns. If you change the scrollDirection to
+                    // horizontal, this produces 2 rows.
+                    crossAxisCount: 4,
+                    // Generate 100 widgets that display their index in the List.
+                    children: List.generate(stats.length, (index) {
+                      return Card(
+                        color: Theme.of(context).colorScheme.primary,
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                stats.entries.elementAt(index).key[1],
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleLarge
+                                    ?.copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onPrimary,
+                                        fontSize: 24),
+                                textAlign: TextAlign.center,
+                                overflow: TextOverflow.fade,
+                                maxLines: 1,
+                              ),
+                              Text(
+                                stats.entries.elementAt(index).key[0],
+                                style: Theme.of(context).textTheme.labelLarge,
+                                textAlign: TextAlign.center,
+                                overflow: TextOverflow.visible,
+                                maxLines: 2,
+                              )
+                            ],
+                          ),
+                        ),
+                      );
+                    })),
+              ),
+              Text(
+                'what would you like to do today?',
+                style: Theme.of(context)
+                    .textTheme
+                    .titleSmall
+                    ?.copyWith(color: Theme.of(context).colorScheme.secondary),
+              ),
+              SizedBox(height: 10.h),
+              SizedBox(
+                height: 1.sh * quicklinks.length * 0.045,
                 child: GridView.count(
                     // Create a grid with 2 columns. If you change the scrollDirection to
                     // horizontal, this produces 2 rows.

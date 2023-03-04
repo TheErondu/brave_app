@@ -1,14 +1,14 @@
+import 'package:brave/src/screens/auth/login_screen.dart';
+import 'package:brave/src/screens/settings/settings_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:estasi/src/components/default_appbar.dart';
-import 'package:estasi/src/components/profile_action_card_widget.dart';
-import 'package:estasi/src/services/storage/user_storage_controller.dart';
-import 'package:estasi/src/data/models/user.dart';
-import 'package:estasi/src/services/storage_service.dart';
-import 'package:estasi/src/data/repository/user_repo.dart';
-import 'package:estasi/src/features/auth/login_screen.dart';
-import 'package:estasi/src/features/settings/settings_view.dart';
-import 'package:estasi/src/utils/constants.dart';
-import 'package:estasi/src/utils/navigation_service.dart';
+import 'package:brave/src/components/default_appbar.dart';
+import 'package:brave/src/components/profile_action_card_widget.dart';
+import 'package:brave/src/services/storage/user_storage_service.dart';
+import 'package:brave/src/data/models/user.dart';
+import 'package:brave/src/services/storage_service.dart';
+import 'package:brave/src/data/repository/user_repo.dart';
+import 'package:brave/src/utils/constants.dart';
+import 'package:brave/src/services/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -88,9 +88,12 @@ class MyProfileScreen extends ConsumerWidget {
                           ),
                         ),
                         onPressed: () async {
+                          navigateToLogin() {
+                            NavigationService.toLogin(context: context);
+                          }
                           await UserRepository().logout();
                           StorageService().deleteFromBox("auth", "token");
-                          NavigationService.toLogin(context: context);
+                          navigateToLogin();
                           UserStorageService().deleteUserData();
                         },
                         child: Text("Logout",
@@ -104,7 +107,4 @@ class MyProfileScreen extends ConsumerWidget {
   }
 }
 
-void toLogin({context}) {
-  Navigator.pushNamedAndRemoveUntil(
-      context, LoginView.routeName, (route) => false);
-}
+
